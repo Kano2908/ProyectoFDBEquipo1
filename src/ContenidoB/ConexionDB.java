@@ -1,6 +1,6 @@
-package ContenidoB;
-
 //Autor Equipo1
+
+package ContenidoB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -23,10 +23,5 @@ public class ConexionDB {
             System.out.println("No Se Conecto: "+e);
         }
         return con;
-    }
-    
-    public static void main(String[] args) {
-        ConexionDB conexion = new ConexionDB();
-        Connection con = conexion.getConnection();
     }
 }
