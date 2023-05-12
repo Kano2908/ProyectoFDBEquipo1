@@ -29,8 +29,8 @@ public class JPEmpleados extends javax.swing.JPanel {
         consultaInicial();
     }
     
-        void limpiarTabla(){
-        for(int i = 0;i < jTEmpleados.getRowCount(); i++){
+    void limpiarTabla() {
+        for (int i = 0; i < jTEmpleados.getRowCount(); i++) {
             modeloEmpleado.removeRow(i);
             i = i - 1;
         }
@@ -95,12 +95,12 @@ public class JPEmpleados extends javax.swing.JPanel {
         jTFApellidoP = new javax.swing.JTextField();
         jTFApellidoM = new javax.swing.JTextField();
         jTFDireccion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBAgregar = new javax.swing.JButton();
         jCBTipoE = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBBuscar = new javax.swing.JButton();
+        jBActualizar = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -163,65 +163,65 @@ public class JPEmpleados extends javax.swing.JPanel {
         jTFIdEmpleado.setEditable(false);
         jTFIdEmpleado.setEnabled(false);
 
-        jButton1.setBackground(new java.awt.Color(34, 18, 81));
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("AGREGAR");
-        jButton1.setBorderPainted(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBAgregar.setBackground(new java.awt.Color(34, 18, 81));
+        jBAgregar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        jBAgregar.setText("AGREGAR");
+        jBAgregar.setBorderPainted(false);
+        jBAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBAgregarActionPerformed(evt);
             }
         });
 
         jCBTipoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Cajero", "Ayudante" }));
 
-        jButton2.setBackground(new java.awt.Color(34, 18, 81));
-        jButton2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("BUSCAR");
-        jButton2.setBorderPainted(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBBuscar.setBackground(new java.awt.Color(34, 18, 81));
+        jBBuscar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jBBuscar.setText("BUSCAR");
+        jBBuscar.setBorderPainted(false);
+        jBBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBBuscarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(34, 18, 81));
-        jButton3.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("ACTUALIZAR");
-        jButton3.setBorderPainted(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBActualizar.setBackground(new java.awt.Color(34, 18, 81));
+        jBActualizar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        jBActualizar.setText("ACTUALIZAR");
+        jBActualizar.setBorderPainted(false);
+        jBActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBActualizarActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(34, 18, 81));
-        jButton4.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("ELIMINAR");
-        jButton4.setBorderPainted(false);
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBEliminar.setBackground(new java.awt.Color(34, 18, 81));
+        jBEliminar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jBEliminar.setText("ELIMINAR");
+        jBEliminar.setBorderPainted(false);
+        jBEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBEliminarActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(34, 18, 81));
-        jButton5.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("LIMPIAR");
-        jButton5.setBorderPainted(false);
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBLimpiar.setBackground(new java.awt.Color(34, 18, 81));
+        jBLimpiar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jBLimpiar.setText("LIMPIAR");
+        jBLimpiar.setBorderPainted(false);
+        jBLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBLimpiarActionPerformed(evt);
             }
         });
 
@@ -258,11 +258,11 @@ public class JPEmpleados extends javax.swing.JPanel {
                             .addComponent(jCBTipoE, javax.swing.GroupLayout.Alignment.TRAILING, 0, 495, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jBAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(62, 62, 62))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -274,27 +274,27 @@ public class JPEmpleados extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTFIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTFNombreE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTFApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTFApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -318,7 +318,7 @@ public class JPEmpleados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         String apellidoP = jTFApellidoP.getText();
         String apellidoM = jTFApellidoM.getText();
         String nombreE = jTFNombreE.getText();
@@ -328,7 +328,7 @@ public class JPEmpleados extends javax.swing.JPanel {
         String queryInsertar = "INSERT INTO empleado (apellidoP, apellidoM, nombreE, direccion, tipoEmpleado) VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombreE + "','" + direccion + "', '" + tipoE + "')";
 
         if (apellidoP.equals("") && apellidoM.equals("") && nombreE.equals("") && direccion.equals("") && tipoE.equals("Seleccionar")) {
-            JOptionPane.showMessageDialog(null, "Tienes que meter los datos, imbecil");
+            JOptionPane.showMessageDialog(null, "Tienes que ingresar datos");
         } else if (apellidoP.equals("") || apellidoM.equals("") || nombreE.equals("") || direccion.equals("") || tipoE.equals("Seleccionar")) {
             JOptionPane.showMessageDialog(null, "Ingresa los datos faltantes");
         } else {
@@ -344,9 +344,9 @@ public class JPEmpleados extends javax.swing.JPanel {
             }
             this.limpiarCampos();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBAgregarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
         int fila = this.jTEmpleados.getSelectedRow();
         int idEmpleado = Integer.parseInt(this.jTEmpleados.getValueAt(fila, 0).toString());
         String apellidoP = jTFApellidoP.getText();
@@ -368,9 +368,9 @@ public class JPEmpleados extends javax.swing.JPanel {
             System.out.println("El error es: "+e);
         }
         this.limpiarCampos();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jBActualizarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         String nombreB = jTFNombreE.getText();
         String buscarSql = "SELECT * FROM Empleado WHERE nombreE LIKE '%" + nombreB + "%'";
         try {
@@ -400,9 +400,9 @@ public class JPEmpleados extends javax.swing.JPanel {
         }
         this.limpiarCampos();
         //this.jBReiniciar.setEnabled(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBBuscarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTEmpleados.getSelectedRow();
         int idEmpleado = Integer.parseInt(this.jTEmpleados.getValueAt(fila, 0).toString());
         String sql = "DELETE FROM Empleado WHERE idEmpleado = "+idEmpleado;
@@ -417,13 +417,13 @@ public class JPEmpleados extends javax.swing.JPanel {
             System.out.println("El error fue: "+e);
         }
         this.limpiarCampos();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
         this.limpiarCampos();
         this.limpiarTabla();
         this.consultaInicial();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jTEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpleadosMouseClicked
         int fila = this.jTEmpleados.getSelectedRow();
@@ -438,11 +438,11 @@ public class JPEmpleados extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jBActualizar;
+    private javax.swing.JButton jBAgregar;
+    private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JComboBox<String> jCBTipoE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
