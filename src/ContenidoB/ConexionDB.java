@@ -17,7 +17,7 @@ public class ConexionDB {
         try{
             Class.forName(this.driver);
             con = DriverManager.getConnection(url+bd, user, psw); //Le pasamos los datos al driver y se almacena en la variable con
-            con.setAutoCommit(false); //Deacativamos el autocommit = 0;
+            //con.setAutoCommit(false); //Deacativamos el autocommit = 0;
             System.out.println("Conexion Establecida En: "+bd);
         } catch(Exception e){
             System.out.println("No Se Conecto: "+e);
