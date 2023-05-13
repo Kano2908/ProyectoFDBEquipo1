@@ -312,6 +312,7 @@ public class JPProveedores extends javax.swing.JPanel {
                 st = con.createStatement();
                 st.executeUpdate(queryInsertar);
                 JOptionPane.showMessageDialog(null, "Registro agregado");
+                con.commit();
                 limpiarTabla();
                 consultaInicial();
             } catch (SQLException e) {
@@ -366,6 +367,7 @@ public class JPProveedores extends javax.swing.JPanel {
             st = con.createStatement();
             st.execute(modifSql);
             JOptionPane.showMessageDialog(null, "Registro Actualizado");
+            con.commit();
             limpiarTabla();
             consultaInicial();
         }catch(Exception e){
@@ -383,6 +385,7 @@ public class JPProveedores extends javax.swing.JPanel {
             st = con.createStatement();
             st.execute(sql);
             JOptionPane.showMessageDialog(null, "Registro Eliminado");
+            con.commit();
             limpiarTabla();
             consultaInicial();
         }catch(Exception e){

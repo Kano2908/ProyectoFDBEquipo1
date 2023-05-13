@@ -4,17 +4,54 @@
  */
 package ContenidoB;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author crist
  */
 public class JPOpciones extends javax.swing.JPanel {
-
+    ConexionDB connect = new ConexionDB();
+    Connection con;
+    Statement st;
+    ResultSet rs;
+    DefaultTableModel modeloBitacora;
     /**
      * Creates new form JPOpciones
      */
     public JPOpciones() {
         initComponents();
+        consultaInicial();
+    }
+    
+    public void consultaInicial(){
+        try{
+            String consultaE = "SELECT * FROM bAcceso";
+            con = connect.getConnection();
+            st = con.createStatement();
+            rs = st.executeQuery(consultaE);
+            
+            Object[] bitacoras = new Object[3];
+            modeloBitacora = (DefaultTableModel) jTBitacoraA.getModel();
+            while(rs.next()){
+                bitacoras[0] = rs.getInt("id");
+                bitacoras[1] = rs.getString("usuario");
+                bitacoras[2] = rs.getString("fecha");
+                modeloBitacora.addRow(bitacoras);
+            }jTBitacoraA.setModel(modeloBitacora);
+        }catch(Exception e){
+            System.out.println("El error es: "+e);
+        }
     }
 
     /**
@@ -30,6 +67,11 @@ public class JPOpciones extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jBRespaldar = new javax.swing.JButton();
+        jBRestaurar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTBitacoraA = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -42,35 +84,91 @@ public class JPOpciones extends javax.swing.JPanel {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mysql.png"))); // NOI18N
 
+        jBRespaldar.setBackground(new java.awt.Color(34, 18, 81));
+        jBRespaldar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBRespaldar.setForeground(new java.awt.Color(255, 255, 255));
+        jBRespaldar.setText("RESPALDAR");
+        jBRespaldar.setBorderPainted(false);
+        jBRespaldar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBRespaldar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRespaldarActionPerformed(evt);
+            }
+        });
+
+        jBRestaurar.setBackground(new java.awt.Color(34, 18, 81));
+        jBRestaurar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jBRestaurar.setForeground(new java.awt.Color(255, 255, 255));
+        jBRestaurar.setText("RESTAURAR");
+        jBRestaurar.setBorderPainted(false);
+        jBRestaurar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRestaurarActionPerformed(evt);
+            }
+        });
+
+        jTBitacoraA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Usuario", "Fecha"
+            }
+        ));
+        jScrollPane1.setViewportView(jTBitacoraA);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jBRespaldar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBRespaldar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(190, 190, 190))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel23))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -85,11 +183,63 @@ public class JPOpciones extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBRespaldarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRespaldarActionPerformed
+        try {
+            Process p = Runtime.getRuntime().exec("mysqldump -u Kano -pRoyalzkano01 PFEquipo1");
+            InputStream is = p.getInputStream();
+            
+            FileOutputStream fos = new FileOutputStream("C:\\RespaldoProyecto/resp_PFEquipo1.sql");
+            
+            byte[] buffer  = new byte[1000];
+            
+            int leido = is.read(buffer);
+            
+            while(leido > 0){
+                fos.write(buffer, 0, leido);
+                leido = is.read(buffer);
+            }
+            
+            fos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(JPOpciones.class.getName()).log(Level. SEVERE, null, ex);
+            System.out.println("error: "+ex);
+        }
+    }//GEN-LAST:event_jBRespaldarActionPerformed
+
+    private void jBRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRestaurarActionPerformed
+        try {
+            Process p = Runtime.getRuntime().exec("mysql -u Kano -pRoyalzkano01 PFEquipo1");
+            OutputStream os = p.getOutputStream();
+            
+            FileInputStream fis = new FileInputStream("C:\\RespaldoProyecto/resp_PFEquipo1.sql");
+            
+            byte[] buffer  = new byte[1000];
+            
+            int leido = fis.read(buffer);
+            
+            while(leido > 0){
+                os.write(buffer, 0, leido);
+                leido = fis.read(buffer);
+            }
+            os.flush(); //Vaciar el buffer de salida
+            os.close();
+            fis.close();
+        } catch (IOException ex) {
+            Logger.getLogger(JPOpciones.class.getName()).log(Level. SEVERE, null, ex);
+            System.out.println("error: "+ex);
+        }
+    }//GEN-LAST:event_jBRestaurarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBRespaldar;
+    private javax.swing.JButton jBRestaurar;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTBitacoraA;
     // End of variables declaration//GEN-END:variables
 }

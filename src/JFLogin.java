@@ -1,5 +1,10 @@
 
+import ContenidoB.ConexionDB;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
@@ -15,7 +20,10 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class JFLogin extends javax.swing.JFrame {
-
+    ConexionDB connect = new ConexionDB();
+    Connection con;
+    Statement st;
+    ResultSet rs;
     /**
      * Creates new form JFLogin
      */
@@ -206,17 +214,35 @@ public class JFLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFUsuarioActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
+        int resultado = 0;
+
         String usuario = jTFUsuario.getText();
         String contraseña = String.valueOf(jPFContraseña.getPassword());
-        if ((usuario.equals("Admin")) && (contraseña.equals("12345"))){
-            JOptionPane.showMessageDialog(null, "Bienvenido");
-            JFMenu iMenu = new JFMenu();
-            iMenu.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Comprueba los datos");
-            jTFUsuario.setText("");
-            jPFContraseña.setText("");
+
+        String QueryU = "SELECT * FROM usuario WHERE usuario = '" + usuario + "' AND contraseña = '" + contraseña + "'";
+        String sqlbitacora = "INSERT INTO bAcceso (usuario) VALUES (USER())";
+        try {
+            con = connect.getConnection();
+            st = con.createStatement();
+            rs = st.executeQuery(QueryU);
+
+            if (rs.next()) {
+                resultado = 1;
+                if (resultado == 1) {
+                    st = con.createStatement();
+                    st.executeUpdate(sqlbitacora);
+                    con.commit();
+
+                    JFMenu iMenu = new JFMenu();
+                    iMenu.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Verifique los datos");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error:" + e);
         }
     }//GEN-LAST:event_jBEntrarActionPerformed
 
