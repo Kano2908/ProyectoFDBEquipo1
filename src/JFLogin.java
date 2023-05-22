@@ -1,4 +1,3 @@
-
 import ContenidoB.ConexionDB;
 import java.awt.Color;
 import java.sql.Connection;
@@ -220,7 +219,6 @@ public class JFLogin extends javax.swing.JFrame {
         String contraseña = String.valueOf(jPFContraseña.getPassword());
 
         String QueryU = "SELECT * FROM usuario WHERE usuario = '" + usuario + "' AND contraseña = '" + contraseña + "'";
-        String sqlbitacora = "INSERT INTO bAcceso (usuario) VALUES (USER())";
         try {
             con = connect.getConnection();
             st = con.createStatement();
@@ -229,10 +227,7 @@ public class JFLogin extends javax.swing.JFrame {
             if (rs.next()) {
                 resultado = 1;
                 if (resultado == 1) {
-                    st = con.createStatement();
-                    st.executeUpdate(sqlbitacora);
-                    con.commit();
-
+                    JOptionPane.showMessageDialog(null, "Bienvenido");
                     JFMenu iMenu = new JFMenu();
                     iMenu.setVisible(true);
                     this.dispose();

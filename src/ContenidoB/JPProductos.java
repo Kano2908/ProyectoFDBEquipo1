@@ -362,7 +362,7 @@ public class JPProductos extends javax.swing.JPanel {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTProductos.getSelectedRow();
         int idProducto = Integer.parseInt(this.jTProductos.getValueAt(fila, 0).toString());
-        String sql = "DELETE FROM productos WHERE idProducto = "+idProducto;
+        String sql = "DELETE FROM producto WHERE idProducto = "+idProducto;
         try{
             con = connect.getConnection();
             st = con.createStatement();

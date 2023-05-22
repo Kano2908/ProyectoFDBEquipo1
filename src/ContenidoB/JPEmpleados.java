@@ -422,8 +422,7 @@ public class JPEmpleados extends javax.swing.JPanel {
         this.jTFApellidoM.setText(this.jTEmpleados.getValueAt(fila, 2).toString());
         this.jTFNombreE.setText(this.jTEmpleados.getValueAt(fila, 3).toString());
         this.jTFDireccion.setText(this.jTEmpleados.getValueAt(fila, 4).toString());
-        String value = (String) jTEmpleados.getValueAt(fila, 5);
-        jCBTipoE.setSelectedItem(value);
+        jCBTipoE.setSelectedItem((String) jTEmpleados.getValueAt(fila, 5));
     }//GEN-LAST:event_jTEmpleadosMouseClicked
 
 
