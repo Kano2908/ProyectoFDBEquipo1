@@ -415,10 +415,10 @@ public class JPClientes extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBActualizar;
-    private javax.swing.JButton jBAgregar;
+    public javax.swing.JButton jBActualizar;
+    public javax.swing.JButton jBAgregar;
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBEliminar;
+    public javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -1,4 +1,5 @@
 import ContenidoB.ConexionDB;
+import ContenidoB.JPEmpleados;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class JFLogin extends javax.swing.JFrame {
+    JFMenu iMenu = new JFMenu();
+    // JPEmpleados cEmpleados = new JPEmpleados();
     ConexionDB connect = new ConexionDB();
     Connection con;
     Statement st;
@@ -30,6 +33,32 @@ public class JFLogin extends javax.swing.JFrame {
         initComponents();
     }
     
+    public void noPrivilegio(){
+        JOptionPane.showMessageDialog(null, "Bienvenido");
+                        iMenu.setVisible(true);
+                        //Quitar Privilegios Opciones
+                        iMenu.jBOpciones.setEnabled(false);
+                        //Tabla Empleados
+                        iMenu.cEmpleados.jBAgregar.setEnabled(false);
+                        iMenu.cEmpleados.jBActualizar.setEnabled(false);
+                        iMenu.cEmpleados.jBEliminar.setEnabled(false);
+                        
+                        //Tabla Clientes
+                        iMenu.cClientes.jBAgregar.setEnabled(false);
+                        iMenu.cClientes.jBActualizar.setEnabled(false);
+                        iMenu.cClientes.jBEliminar.setEnabled(false);
+                        
+                        //Tabla Proovedores
+                        iMenu.cProveedores.jBAgregar.setEnabled(false);
+                        iMenu.cProveedores.jBActualizar.setEnabled(false);
+                        iMenu.cProveedores.jBEliminar.setEnabled(false);
+                        
+                        //Tabla Productos
+                        iMenu.cProductos.jBAgregar.setEnabled(false);
+                        iMenu.cProductos.jBActualizar.setEnabled(false);
+                        iMenu.cProductos.jBEliminar.setEnabled(false);
+                        this.dispose();
+    }
     
 
     /**
@@ -227,10 +256,14 @@ public class JFLogin extends javax.swing.JFrame {
             if (rs.next()) {
                 resultado = 1;
                 if (resultado == 1) {
-                    JOptionPane.showMessageDialog(null, "Bienvenido");
-                    JFMenu iMenu = new JFMenu();
-                    iMenu.setVisible(true);
-                    this.dispose();
+                    if (usuario.equals("Admin") && contraseña.equals("12345")) {
+                        JOptionPane.showMessageDialog(null, "Bienvenido");
+                        JFMenu iMenu = new JFMenu();
+                        iMenu.setVisible(true);
+                        this.dispose();
+                    } else if (usuario.equals("Gerente") && contraseña.equals("12345")) {
+                        noPrivilegio();
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Verifique los datos");

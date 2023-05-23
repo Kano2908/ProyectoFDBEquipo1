@@ -8,11 +8,17 @@ import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 /*
  * @author crist
  */
 public class JFMenu extends javax.swing.JFrame {
-
+    JPInicio cInicio = new JPInicio();   
+    JPEmpleados cEmpleados = new JPEmpleados();
+    JPClientes cClientes = new JPClientes();
+    JPProveedores cProveedores = new JPProveedores();
+    JPProductos cProductos = new JPProductos();
+    JPOpciones cOpciones = new JPOpciones();
     public JFMenu() {
         initComponents();
         initContent();
@@ -45,13 +51,13 @@ public class JFMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
         jBInicio = new javax.swing.JButton();
         jBEmpleado = new javax.swing.JButton();
         jBClientes = new javax.swing.JButton();
         jBProveedores = new javax.swing.JButton();
         jBProductos = new javax.swing.JButton();
         jBOpciones = new javax.swing.JButton();
+        jBCerrarS = new javax.swing.JButton();
         jPHeader = new javax.swing.JPanel();
         jLDate = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -77,9 +83,6 @@ public class JFMenu extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator1.setAlignmentX(1.5F);
         jSeparator1.setAlignmentY(0.9F);
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botella.png"))); // NOI18N
 
         jBInicio.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBInicio.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,54 +168,62 @@ public class JFMenu extends javax.swing.JFrame {
             }
         });
 
+        jBCerrarS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botella.png"))); // NOI18N
+        jBCerrarS.setToolTipText("Cerrar Sesion");
+        jBCerrarS.setBorderPainted(false);
+        jBCerrarS.setContentAreaFilled(false);
+        jBCerrarS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBCerrarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCerrarSActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPOpcionesLayout = new javax.swing.GroupLayout(jPOpciones);
         jPOpciones.setLayout(jPOpcionesLayout);
         jPOpcionesLayout.setHorizontalGroup(
             jPOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jBCerrarS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPOpcionesLayout.createSequentialGroup()
-                .addGroup(jPOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(jBClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPOpcionesLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPOpcionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1)
-                .addContainerGap())
         );
         jPOpcionesLayout.setVerticalGroup(
             jPOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPOpcionesLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(jPOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPOpcionesLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(28, 28, 28)
                         .addComponent(jLabel2))
-                    .addGroup(jPOpcionesLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel1))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
+                .addComponent(jBCerrarS)
+                .addGap(77, 77, 77)
                 .addComponent(jBInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jBEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jBClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jBProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jBProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGap(12, 12, 12)
+                .addComponent(jBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPHeader.setBackground(new java.awt.Color(255, 255, 255));
@@ -250,11 +261,11 @@ public class JFMenu extends javax.swing.JFrame {
         jPContenidoM.setLayout(jPContenidoMLayout);
         jPContenidoMLayout.setHorizontalGroup(
             jPContenidoMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 888, Short.MAX_VALUE)
         );
         jPContenidoMLayout.setVerticalGroup(
             jPContenidoMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 544, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPFondoLayout = new javax.swing.GroupLayout(jPFondo);
@@ -291,7 +302,6 @@ public class JFMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmpleadoActionPerformed
-        JPEmpleados cEmpleados = new JPEmpleados();
         cEmpleados.setSize(885, 500);
         cEmpleados.setLocation(0,0);
         
@@ -302,7 +312,6 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEmpleadoActionPerformed
 
     private void jBClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClientesActionPerformed
-        JPClientes cClientes = new JPClientes();
         cClientes.setSize(885, 500);
         cClientes.setLocation(0,0);
         
@@ -313,7 +322,6 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBClientesActionPerformed
 
     private void jBProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProveedoresActionPerformed
-        JPProveedores cProveedores = new JPProveedores();
         cProveedores.setSize(885, 500);
         cProveedores.setLocation(0,0);
         
@@ -324,7 +332,6 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBProveedoresActionPerformed
 
     private void jBProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProductosActionPerformed
-        JPProductos cProductos = new JPProductos();
         cProductos.setSize(885, 500);
         cProductos.setLocation(0,0);
         
@@ -335,7 +342,6 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBProductosActionPerformed
 
     private void jBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOpcionesActionPerformed
-        JPOpciones cOpciones = new JPOpciones();
         cOpciones.setSize(885, 500);
         cOpciones.setLocation(0,0);
         
@@ -346,7 +352,6 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBOpcionesActionPerformed
 
     private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
-        JPInicio cInicio = new JPInicio();
         cInicio.setSize(900, 500);
         cInicio.setLocation(0,0);
         
@@ -355,6 +360,13 @@ public class JFMenu extends javax.swing.JFrame {
         jPContenidoM.revalidate();
         jPContenidoM.repaint();
     }//GEN-LAST:event_jBInicioActionPerformed
+
+    private void jBCerrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSActionPerformed
+        JFLogin cLogin = new JFLogin();
+        JOptionPane.showMessageDialog(null, "Sesion Cerrada");
+        cLogin.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBCerrarSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,16 +404,16 @@ public class JFMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCerrarS;
     private javax.swing.JButton jBClientes;
-    private javax.swing.JButton jBEmpleado;
+    public javax.swing.JButton jBEmpleado;
     private javax.swing.JButton jBInicio;
-    private javax.swing.JButton jBOpciones;
-    private javax.swing.JButton jBProductos;
+    public javax.swing.JButton jBOpciones;
+    public javax.swing.JButton jBProductos;
     private javax.swing.JButton jBProveedores;
     private javax.swing.JLabel jLDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPContenidoM;
     private javax.swing.JPanel jPFondo;
