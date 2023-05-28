@@ -1,3 +1,5 @@
+package JForms;
+
 import ContenidoB.JPClientes;
 import ContenidoB.JPEmpleados;
 import ContenidoB.JPInicio;
@@ -86,7 +88,7 @@ public class JFMenu extends javax.swing.JFrame {
 
         jBInicio.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBInicio.setForeground(new java.awt.Color(255, 255, 255));
-        jBInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.png"))); // NOI18N
+        jBInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/inicio.png"))); // NOI18N
         jBInicio.setText("INICIO");
         jBInicio.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 10, new java.awt.Color(0, 0, 0)));
         jBInicio.setBorderPainted(false);
@@ -100,7 +102,7 @@ public class JFMenu extends javax.swing.JFrame {
 
         jBEmpleado.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        jBEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
+        jBEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/empleado.png"))); // NOI18N
         jBEmpleado.setText("EMPLEADOS");
         jBEmpleado.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 10, new java.awt.Color(0, 0, 0)));
         jBEmpleado.setBorderPainted(false);
@@ -114,7 +116,7 @@ public class JFMenu extends javax.swing.JFrame {
 
         jBClientes.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBClientes.setForeground(new java.awt.Color(255, 255, 255));
-        jBClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/empleado.png"))); // NOI18N
+        jBClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cliente.png"))); // NOI18N
         jBClientes.setText("CLIENTES");
         jBClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 10, new java.awt.Color(0, 0, 0)));
         jBClientes.setBorderPainted(false);
@@ -128,7 +130,7 @@ public class JFMenu extends javax.swing.JFrame {
 
         jBProveedores.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBProveedores.setForeground(new java.awt.Color(255, 255, 255));
-        jBProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inventario.png"))); // NOI18N
+        jBProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/inventario.png"))); // NOI18N
         jBProveedores.setText("PROVEEDORES");
         jBProveedores.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 10, new java.awt.Color(0, 0, 0)));
         jBProveedores.setBorderPainted(false);
@@ -142,7 +144,7 @@ public class JFMenu extends javax.swing.JFrame {
 
         jBProductos.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBProductos.setForeground(new java.awt.Color(255, 255, 255));
-        jBProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos.png"))); // NOI18N
+        jBProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/productos.png"))); // NOI18N
         jBProductos.setText("PRODUCTOS");
         jBProductos.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 10, new java.awt.Color(0, 0, 0)));
         jBProductos.setBorderPainted(false);
@@ -156,7 +158,7 @@ public class JFMenu extends javax.swing.JFrame {
 
         jBOpciones.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
         jBOpciones.setForeground(new java.awt.Color(255, 255, 255));
-        jBOpciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/configuraciones.png"))); // NOI18N
+        jBOpciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/configuraciones.png"))); // NOI18N
         jBOpciones.setText("OPCIONES");
         jBOpciones.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 10, new java.awt.Color(0, 0, 0)));
         jBOpciones.setBorderPainted(false);
@@ -168,7 +170,7 @@ public class JFMenu extends javax.swing.JFrame {
             }
         });
 
-        jBCerrarS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botella.png"))); // NOI18N
+        jBCerrarS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/botella.png"))); // NOI18N
         jBCerrarS.setToolTipText("Cerrar Sesion");
         jBCerrarS.setBorderPainted(false);
         jBCerrarS.setContentAreaFilled(false);

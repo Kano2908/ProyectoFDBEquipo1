@@ -6,22 +6,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /*
  * @author crist
  */
 public class JPProveedores extends javax.swing.JPanel {
+
     ConexionDB connect = new ConexionDB();
     Connection con;
     Statement st;
     ResultSet rs;
     DefaultTableModel modeloProveedor;
+    String iniciarT = "BEGIN";
 
     public JPProveedores() {
         initComponents();
         consultaInicial();
     }
-    
-     void limpiarTabla() {
+
+    void limpiarTabla() {
         for (int i = 0; i < jTProveedores.getRowCount(); i++) {
             modeloProveedor.removeRow(i);
             i = i - 1;
@@ -310,13 +313,33 @@ public class JPProveedores extends javax.swing.JPanel {
             try {
                 con = connect.getConnection();
                 st = con.createStatement();
+                st.execute(iniciarT);
                 st.executeUpdate(queryInsertar);
                 JOptionPane.showMessageDialog(null, "Registro agregado");
                 con.commit();
+
                 limpiarTabla();
                 consultaInicial();
             } catch (SQLException e) {
                 System.out.println("Error: " + e);
+                if (con != null) {
+                    try {
+                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                        con.rollback();
+                    } catch (SQLException ex) {
+                        System.out.println("Error: " + ex);
+                    }
+                }
+            } finally {
+                try {
+                    if (st != null && con != null) {
+                        con.setAutoCommit(true);
+                        st.close();
+                        con.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar " + e);
+                }
             }
             this.limpiarCampos();
         }
@@ -325,29 +348,30 @@ public class JPProveedores extends javax.swing.JPanel {
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         String nombreB = jTFNombreP.getText();
         String buscarSql = "SELECT * FROM proveedor WHERE nombreP LIKE '%" + nombreB + "%'";
-        try{
+        try {
             limpiarTabla();
             con = connect.getConnection();
             st = con.createStatement();
             rs = st.executeQuery(buscarSql);
-            
+
             Object[] proveedores = new Object[5];
             modeloProveedor = (DefaultTableModel) jTProveedores.getModel();
-            while(rs.next()){
+            while (rs.next()) {
                 proveedores[0] = rs.getInt("idProveedor");
                 proveedores[1] = rs.getString("apellidoP");
                 proveedores[2] = rs.getString("apellidoM");
                 proveedores[3] = rs.getString("nombreP");
                 proveedores[4] = rs.getString("direccion");
-                
+
                 modeloProveedor.addRow(proveedores);
-            }if(modeloProveedor.getRowCount() == 0){
+            }
+            if (modeloProveedor.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
                 consultaInicial();
             }
             jTProveedores.setModel(modeloProveedor);
-        }catch(Exception e){
-            System.out.println("El error es: "+e);
+        } catch (Exception e) {
+            System.out.println("El error es: " + e);
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBBuscarActionPerformed
@@ -359,19 +383,39 @@ public class JPProveedores extends javax.swing.JPanel {
         String apellidoM = jTFApellidoM.getText();
         String nombreP = jTFNombreP.getText();
         String direccion = jTFDireccion.getText();
-        
-        String modifSql = "UPDATE proveedor SET apellidoP='"+apellidoP+"',apellidoM='"+apellidoM+"', nombreP ='"+nombreP+"', direccion='"+direccion+"' WHERE idProveedor = "+idProveedor;
-        
-        try{
+
+        String modifSql = "UPDATE proveedor SET apellidoP='" + apellidoP + "',apellidoM='" + apellidoM + "', nombreP ='" + nombreP + "', direccion='" + direccion + "' WHERE idProveedor = " + idProveedor;
+
+        try {
             con = connect.getConnection();
             st = con.createStatement();
+            st.execute(iniciarT);
             st.execute(modifSql);
             JOptionPane.showMessageDialog(null, "Registro Actualizado");
             con.commit();
+
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error es: "+e);
+        } catch (Exception e) {
+            System.out.println("El error es: " + e);
+            if (con != null) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        } finally {
+            try {
+                if (st != null && con != null) {
+                    con.setAutoCommit(true);
+                    st.close();
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar " + e);
+            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
@@ -379,17 +423,37 @@ public class JPProveedores extends javax.swing.JPanel {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTProveedores.getSelectedRow();
         int idProveedor = Integer.parseInt(this.jTProveedores.getValueAt(fila, 0).toString());
-        String sql = "DELETE FROM proveedor WHERE idProveedor = "+idProveedor;
-        try{
+        String sql = "DELETE FROM proveedor WHERE idProveedor = " + idProveedor;
+        try {
             con = connect.getConnection();
             st = con.createStatement();
+            st.execute(iniciarT);
             st.execute(sql);
             JOptionPane.showMessageDialog(null, "Registro Eliminado");
             con.commit();
+
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error fue: "+e);
+        } catch (Exception e) {
+            System.out.println("El error fue: " + e);
+            if (con != null) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        } finally {
+            try {
+                if (st != null && con != null) {
+                    con.setAutoCommit(true);
+                    st.close();
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar " + e);
+            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBEliminarActionPerformed

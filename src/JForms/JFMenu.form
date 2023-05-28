@@ -169,7 +169,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/inicio.png"/>
+                  <Image iconType="3" name="/Icons/inicio.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="INICIO"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -196,7 +196,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/cliente.png"/>
+                  <Image iconType="3" name="/Icons/empleado.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="EMPLEADOS"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -226,7 +226,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/empleado.png"/>
+                  <Image iconType="3" name="/Icons/cliente.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CLIENTES"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -253,7 +253,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/inventario.png"/>
+                  <Image iconType="3" name="/Icons/inventario.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="PROVEEDORES"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -280,7 +280,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/productos.png"/>
+                  <Image iconType="3" name="/Icons/productos.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="PRODUCTOS"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -310,7 +310,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/configuraciones.png"/>
+                  <Image iconType="3" name="/Icons/configuraciones.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="OPCIONES"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -334,7 +334,7 @@
             <Component class="javax.swing.JButton" name="jBCerrarS">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/botella.png"/>
+                  <Image iconType="3" name="/Icons/botella.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Cerrar Sesion"/>
                 <Property name="borderPainted" type="boolean" value="false"/>

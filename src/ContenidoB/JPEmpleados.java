@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /*
@@ -14,7 +16,8 @@ public class JPEmpleados extends javax.swing.JPanel {
     Statement st;
     ResultSet rs;
     DefaultTableModel modeloEmpleado;
-    
+    String iniciarT = "BEGIN";
+   
     public JPEmpleados() {
         initComponents();
         consultaInicial();
@@ -310,7 +313,8 @@ public class JPEmpleados extends javax.swing.JPanel {
         String nombreE = jTFNombreE.getText();
         String direccion = jTFDireccion.getText();
         String tipoE = this.jCBTipoE.getSelectedItem().toString();
-
+        
+        
         String queryInsertar = "INSERT INTO empleado (apellidoP, apellidoM, nombreE, direccion, tipoEmpleado) VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombreE + "','" + direccion + "', '" + tipoE + "')";
 
         if (apellidoP.equals("") && apellidoM.equals("") && nombreE.equals("") && direccion.equals("") && tipoE.equals("Seleccionar")) {
@@ -321,13 +325,33 @@ public class JPEmpleados extends javax.swing.JPanel {
             try {
                 con = connect.getConnection();
                 st = con.createStatement();
+                st.execute(iniciarT);
                 st.executeUpdate(queryInsertar);
                 JOptionPane.showMessageDialog(null, "Registro agregado");
                 con.commit();
+                
                 limpiarTabla();
                 consultaInicial();
             } catch (SQLException e) {
                 System.out.println("Error: " + e);
+                if(con != null){
+                    try {
+                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                        con.rollback();
+                    } catch (SQLException ex) {
+                        System.out.println("Error: "+ex);
+                    }
+                }
+            } finally {
+                try {
+                    if (st != null && con != null) {
+                        con.setAutoCommit(true);
+                        st.close();
+                        con.close();
+                    }   
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar "+e);
+                }
             }
             this.limpiarCampos();
         }
@@ -344,16 +368,36 @@ public class JPEmpleados extends javax.swing.JPanel {
         
         String modifSql = "UPDATE Empleado SET apellidoP='"+apellidoP+"',apellidoM='"+apellidoM+"', nombreE ='"+nombreE+"', direccion='"+direccion+"', tipoEmpleado='"+tipoE+"' WHERE idEmpleado = "+idEmpleado;
         
-        try{
+        try {
             con = connect.getConnection();
             st = con.createStatement();
+            st.execute(iniciarT);
             st.execute(modifSql);
             JOptionPane.showMessageDialog(null, "Registro Actualizado");
             con.commit();
+
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error es: "+e);
+        } catch (Exception e) {
+            System.out.println("El error es: " + e);
+            if (con != null) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        } finally {
+            try {
+                if (st != null && con != null) {
+                    con.setAutoCommit(true);
+                    st.close();
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar " + e);
+            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
@@ -394,17 +438,37 @@ public class JPEmpleados extends javax.swing.JPanel {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTEmpleados.getSelectedRow();
         int idEmpleado = Integer.parseInt(this.jTEmpleados.getValueAt(fila, 0).toString());
-        String sql = "DELETE FROM Empleado WHERE idEmpleado = "+idEmpleado;
-        try{
+        String sql = "DELETE FROM Empleado WHERE idEmpleado = " + idEmpleado;
+        try {
             con = connect.getConnection();
             st = con.createStatement();
+            st.execute(iniciarT);
             st.execute(sql);
             JOptionPane.showMessageDialog(null, "Registro Eliminado");
             con.commit();
+            
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error fue: "+e);
+        } catch (Exception e) {
+            System.out.println("El error fue: " + e);
+            if (con != null) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        } finally {
+            try {
+                if (st != null && con != null) {
+                    con.setAutoCommit(true);
+                    st.close();
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar " + e);
+            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBEliminarActionPerformed

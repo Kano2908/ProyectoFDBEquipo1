@@ -4,16 +4,13 @@
  */
 package ContenidoB;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -195,47 +192,46 @@ public class JPOpciones extends javax.swing.JPanel {
 
     private void jBRespaldarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRespaldarActionPerformed
         try {
-            Process p = Runtime.getRuntime().exec("mysqldump -u Kano -pRoyalzkano01 PFEquipo1");
-            InputStream is = p.getInputStream();
+            Process proceso = Runtime.getRuntime().exec("mysqldump -u Kano -pRoyalzkano01 PFEquipo1");
+            InputStream entrada = proceso.getInputStream();
             
-            FileOutputStream fos = new FileOutputStream("C:\\RespaldoProyecto/resp_PFEquipo1.sql");
+            FileOutputStream archivo = new FileOutputStream("C:\\RespaldoProyecto\\PFEquipo1Respaldo.sql");
             
             byte[] buffer  = new byte[1000];
             
-            int leido = is.read(buffer);
+            int byteLeido = entrada.read(buffer); 
             
-            while(leido > 0){
-                fos.write(buffer, 0, leido);
-                leido = is.read(buffer);
+            while(byteLeido > 0){ //Mientras este leyendo algo
+                archivo.write(buffer, 0, byteLeido);
+                byteLeido = entrada.read(buffer);
             }
             
-            fos.close();
+            JOptionPane.showMessageDialog(null, "Respaldo Creado");
+            archivo.close();
         } catch (IOException ex) {
-            Logger.getLogger(JPOpciones.class.getName()).log(Level. SEVERE, null, ex);
             System.out.println("error: "+ex);
         }
     }//GEN-LAST:event_jBRespaldarActionPerformed
 
     private void jBRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRestaurarActionPerformed
         try {
-            Process p = Runtime.getRuntime().exec("mysql -u Kano -pRoyalzkano01 PFEquipo1");
-            OutputStream os = p.getOutputStream();
+            Process proceso = Runtime.getRuntime().exec("mysql -u Kano -pRoyalzkano01 PFEquipo1");
+            OutputStream salida = proceso.getOutputStream();
             
-            FileInputStream fis = new FileInputStream("C:\\RespaldoProyecto/resp_PFEquipo1.sql");
+            FileInputStream archivo = new FileInputStream("C:\\RespaldoProyecto/resp_PFEquipo1.sql");
             
             byte[] buffer  = new byte[1000];
             
-            int leido = fis.read(buffer);
+            int byteLeido = archivo.read(buffer);
             
-            while(leido > 0){
-                os.write(buffer, 0, leido);
-                leido = fis.read(buffer);
+            while(byteLeido > 0){
+                salida.write(buffer, 0, byteLeido);
+                byteLeido = archivo.read(buffer);
             }
-            os.flush(); //Vaciar el buffer de salida
-            os.close();
-            fis.close();
+            salida.flush(); //Vaciar el buffer de salida
+            salida.close();
+            archivo.close();
         } catch (IOException ex) {
-            Logger.getLogger(JPOpciones.class.getName()).log(Level. SEVERE, null, ex);
             System.out.println("error: "+ex);
         }
     }//GEN-LAST:event_jBRestaurarActionPerformed

@@ -1,3 +1,6 @@
+package JForms;
+
+import JForms.JFMenu;
 import ContenidoB.ConexionDB;
 import ContenidoB.JPEmpleados;
 import java.awt.Color;
@@ -90,9 +93,9 @@ public class JFLogin extends javax.swing.JFrame {
 
         jPFondo.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botellachiqui.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/botellachiqui.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/login.jpg"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
         jLabel3.setText("INICIAR SESIÓN");
@@ -170,7 +173,7 @@ public class JFLogin extends javax.swing.JFrame {
                             .addComponent(jTFUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                             .addComponent(jPFContraseña))
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(65, 65, 65))
         );
         jPFondoLayout.setVerticalGroup(

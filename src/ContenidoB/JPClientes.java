@@ -14,6 +14,7 @@ public class JPClientes extends javax.swing.JPanel {
     Statement st;
     ResultSet rs;
     DefaultTableModel modeloCliente;
+    String iniciarT = "BEGIN";
 
     public JPClientes() {
         initComponents();
@@ -314,13 +315,34 @@ public class JPClientes extends javax.swing.JPanel {
             try {
                 con = connect.getConnection();
                 st = con.createStatement();
+                st.execute(iniciarT);
                 st.executeUpdate(queryInsertar);
                 JOptionPane.showMessageDialog(null, "Registro agregado");
                 con.commit();
+                
                 limpiarTabla();
                 consultaInicial();
             } catch (SQLException e) {
                 System.out.println("Error: " + e);
+                System.out.println("Error: " + e);
+                if(con != null){
+                    try {
+                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                        con.rollback();
+                    } catch (SQLException ex) {
+                        System.out.println("Error: "+ex);
+                    }
+                }
+            } finally {
+                try {
+                    if (st != null && con != null) {
+                        con.setAutoCommit(true);
+                        st.close();
+                        con.close();
+                    }   
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar "+e);
+                }
             }
             this.limpiarCampos();
         }
@@ -339,13 +361,33 @@ public class JPClientes extends javax.swing.JPanel {
         try{
             con = connect.getConnection();
             st = con.createStatement();
+            st.execute(iniciarT);
             st.execute(modifSql);
             JOptionPane.showMessageDialog(null, "Registro Actualizado");
             con.commit();
+            
             limpiarTabla();
             consultaInicial();
         }catch(Exception e){
             System.out.println("El error es: "+e);
+            if (con != null) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        } finally {
+            try {
+                if (st != null && con != null) {
+                    con.setAutoCommit(true);
+                    st.close();
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar " + e);
+            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
@@ -366,13 +408,33 @@ public class JPClientes extends javax.swing.JPanel {
         try{
             con = connect.getConnection();
             st = con.createStatement();
+            st.execute(iniciarT);
             st.execute(sql);
             JOptionPane.showMessageDialog(null, "Registro Eliminado");
             con.commit();
+            
             limpiarTabla();
             consultaInicial();
         }catch(Exception e){
             System.out.println("El error fue: "+e);
+            if (con != null) {
+                try {
+                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
+                    con.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        } finally {
+            try {
+                if (st != null && con != null) {
+                    con.setAutoCommit(true);
+                    st.close();
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar " + e);
+            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBEliminarActionPerformed
