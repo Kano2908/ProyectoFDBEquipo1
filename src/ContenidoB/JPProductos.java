@@ -2,7 +2,6 @@ package ContenidoB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -11,12 +10,11 @@ import javax.swing.table.DefaultTableModel;
  * @author crist
  */
 public class JPProductos extends javax.swing.JPanel {
-    ConexionDB connect = new ConexionDB();
+    ConexionDB baseDatos = new ConexionDB("PFEquipo1", "Kano", "Royalzkano01");
     Connection con;
     Statement st;
     ResultSet rs;
     DefaultTableModel modeloProducto;
-    String iniciarT = "BEGIN";
 
     public JPProductos() {
         initComponents();
@@ -40,21 +38,22 @@ public class JPProductos extends javax.swing.JPanel {
     public void consultaInicial() {
         try {
             String consultaE = "SELECT * FROM producto";
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(consultaE);
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement();
+                rs = st.executeQuery(consultaE);
 
-            Object[] productos = new Object[4];
-            modeloProducto = (DefaultTableModel) jTProductos.getModel();
-            while (rs.next()) {
-                productos[0] = rs.getInt("idProducto");
-                productos[1] = rs.getString("nombreProducto");
-                productos[2] = rs.getString("descripcion");
-                productos[3] = rs.getString("precio");
+                Object[] productos = new Object[4];
+                modeloProducto = (DefaultTableModel) jTProductos.getModel();
+                while (rs.next()) {
+                    productos[0] = rs.getInt("idProducto");
+                    productos[1] = rs.getString("nombreProducto");
+                    productos[2] = rs.getString("descripcion");
+                    productos[3] = rs.getString("precio");
 
-                modeloProducto.addRow(productos);
-            }
-            jTProductos.setModel(modeloProducto);
+                    modeloProducto.addRow(productos);
+                }
+                jTProductos.setModel(modeloProducto);
+            }  
         } catch (Exception e) {
             System.out.println("El error es: " + e);
         }
@@ -293,64 +292,40 @@ public class JPProductos extends javax.swing.JPanel {
         } else if (nombreProducto.equals("") || descripcion.equals("") || precio.equals("")) {
             JOptionPane.showMessageDialog(null, "Ingresa los datos faltantes");
         } else {
-            try {
-                con = connect.getConnection();
-                st = con.createStatement();
-                st.execute(iniciarT);
-                st.executeUpdate(queryInsertar);
-                JOptionPane.showMessageDialog(null, "Registro agregado");
-                con.commit();
-                
+            if (baseDatos.conectar()) {
+                baseDatos.insertQuery("", "", nombreProducto, "", "", descripcion, precio, 4);
                 limpiarTabla();
                 consultaInicial();
-            } catch (SQLException e) {
-                System.out.println("Error: " + e);
-                if(con != null){
-                    try {
-                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                        con.rollback();
-                    } catch (SQLException ex) {
-                        System.out.println("Error: "+ex);
-                    }
-                }
-            } finally {
-                try {
-                    if (st != null && con != null) {
-                        con.setAutoCommit(true);
-                        st.close();
-                        con.close();
-                    }   
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar "+e);
-                }
             }
             this.limpiarCampos();
-        } 
+        }
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         String nombreB = jTFNombreProducto.getText();
         String buscarSql = "SELECT * FROM producto WHERE nombreProducto LIKE '%" + nombreB + "%'";
-        try{
+        try {
             limpiarTabla();
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(buscarSql);
-            
-            Object[] productos = new Object[5];
-            modeloProducto = (DefaultTableModel) jTProductos.getModel();
-            while(rs.next()){
-                productos[0] = rs.getInt("idProducto");
-                productos[1] = rs.getString("nombreProducto");
-                productos[2] = rs.getString("descripcion");
-                productos[3] = rs.getString("precio");
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement();
+                rs = st.executeQuery(buscarSql);
 
-                modeloProducto.addRow(productos);
-            }if(modeloProducto.getRowCount() == 0){
-                JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
-                consultaInicial();
+                Object[] productos = new Object[5];
+                modeloProducto = (DefaultTableModel) jTProductos.getModel();
+                while (rs.next()) {
+                    productos[0] = rs.getInt("idProducto");
+                    productos[1] = rs.getString("nombreProducto");
+                    productos[2] = rs.getString("descripcion");
+                    productos[3] = rs.getString("precio");
+
+                    modeloProducto.addRow(productos);
+                }
+                if (modeloProducto.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
+                    consultaInicial();
+                }
+                jTProductos.setModel(modeloProducto);
             }
-            jTProductos.setModel(modeloProducto);
         }catch(Exception e){
             System.out.println("El error es: "+e);
         }
@@ -364,77 +339,23 @@ public class JPProductos extends javax.swing.JPanel {
         String descripcion = jTFDescripcion.getText();
         String precio = String.valueOf(jTFPrecio.getText());
         
-        String modifSql = "UPDATE producto SET nombreProducto='"+nombreProducto+"',descripcion='"+descripcion+"', precio ='"+precio+"' WHERE idProducto = "+idProducto;
-        
-        try{
-            con = connect.getConnection();
-            st = con.createStatement();
-            st.execute(iniciarT);
-            st.execute(modifSql);
-            JOptionPane.showMessageDialog(null, "Registro Actualizado");
-            con.commit();
-            
+        if(baseDatos.conectar()){
+            baseDatos.updateQuery(idProducto, "", "", nombreProducto, "", "", descripcion, precio, 4);
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error es: "+e);
-            if(con != null){
-                    try {
-                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                        con.rollback();
-                    } catch (SQLException ex) {
-                        System.out.println("Error: "+ex);
-                    }
-                }
-        } finally {
-                try {
-                    if (st != null && con != null) {
-                        con.setAutoCommit(true);
-                        st.close();
-                        con.close();
-                    }   
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar "+e);
-                }
-            }
+        }
         this.limpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTProductos.getSelectedRow();
         int idProducto = Integer.parseInt(this.jTProductos.getValueAt(fila, 0).toString());
-        String sql = "DELETE FROM producto WHERE idProducto = "+idProducto;
-        try{
-            con = connect.getConnection();
-            st = con.createStatement();
-            st.execute(iniciarT);
-            st.execute(sql);
-            JOptionPane.showMessageDialog(null, "Registro Eliminado");
-            con.commit();
-            
+        
+        if(baseDatos.conectar()){
+            baseDatos.deleteQuery(idProducto, 4);
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error fue: "+e);
-            if(con != null){
-                    try {
-                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                        con.rollback();
-                    } catch (SQLException ex) {
-                        System.out.println("Error: "+ex);
-                    }
-                }
-        } finally {
-                try {
-                    if (st != null && con != null) {
-                        con.setAutoCommit(true);
-                        st.close();
-                        con.close();
-                    }   
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar "+e);
-                }
-            }
+        }
         this.limpiarCampos();
     }//GEN-LAST:event_jBEliminarActionPerformed
 

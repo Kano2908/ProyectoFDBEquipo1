@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ContenidoB;
 
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -18,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  * @author crist
  */
 public class JPOpciones extends javax.swing.JPanel {
-    ConexionDB connect = new ConexionDB();
+    ConexionDB baseDatos = new ConexionDB("PFEquipo1", "Kano", "Royalzkano01");
     Connection con;
     Statement st;
     ResultSet rs;
@@ -28,28 +22,37 @@ public class JPOpciones extends javax.swing.JPanel {
      */
     public JPOpciones() {
         initComponents();
-        consultaInicial();
+        consultaInicialBA();
     }
     
-    public void consultaInicial(){
-        try{
+    void limpiarTabla() {
+        for (int i = 0; i < jTBitacoraA.getRowCount(); i++) {
+            modeloBitacora.removeRow(i);
+            i = i - 1;
+        }
+    }
+    
+    public void consultaInicialBA(){
+        try {
             String consultaE = "SELECT * FROM bAcceso";
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(consultaE);
-            
-            Object[] bitacoras = new Object[7];
-            modeloBitacora = (DefaultTableModel) jTBitacoraA.getModel();
-            while(rs.next()){
-                bitacoras[0] = rs.getInt("id");
-                bitacoras[1] = rs.getString("usuario");
-                bitacoras[2] = rs.getString("fecha");
-                bitacoras[3] = rs.getString("operacion");
-                bitacoras[4] = rs.getString("tabla");
-                bitacoras[5] = rs.getString("valorViejo");
-                bitacoras[6] = rs.getString("valorNuevo");
-                modeloBitacora.addRow(bitacoras);
-            }jTBitacoraA.setModel(modeloBitacora);
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement();
+                rs = st.executeQuery(consultaE);
+
+                Object[] bitacoras = new Object[7];
+                modeloBitacora = (DefaultTableModel) jTBitacoraA.getModel();
+                while (rs.next()) {
+                    bitacoras[0] = rs.getInt("id");
+                    bitacoras[1] = rs.getString("usuario");
+                    bitacoras[2] = rs.getString("fecha");
+                    bitacoras[3] = rs.getString("operacion");
+                    bitacoras[4] = rs.getString("tabla");
+                    bitacoras[5] = rs.getString("valorViejo");
+                    bitacoras[6] = rs.getString("valorNuevo");
+                    modeloBitacora.addRow(bitacoras);
+                }
+                jTBitacoraA.setModel(modeloBitacora);
+            }
         }catch(Exception e){
             System.out.println("El error es: "+e);
         }
@@ -195,7 +198,7 @@ public class JPOpciones extends javax.swing.JPanel {
             Process proceso = Runtime.getRuntime().exec("mysqldump -u Kano -pRoyalzkano01 PFEquipo1");
             InputStream entrada = proceso.getInputStream();
             
-            FileOutputStream archivo = new FileOutputStream("C:\\RespaldoProyecto\\PFEquipo1Respaldo.sql");
+            FileOutputStream archivo = new FileOutputStream("C:\\Respaldos/PFEquipo1Respaldo.sql");
             
             byte[] buffer  = new byte[1000];
             
@@ -218,7 +221,7 @@ public class JPOpciones extends javax.swing.JPanel {
             Process proceso = Runtime.getRuntime().exec("mysql -u Kano -pRoyalzkano01 PFEquipo1");
             OutputStream salida = proceso.getOutputStream();
             
-            FileInputStream archivo = new FileInputStream("C:\\RespaldoProyecto/resp_PFEquipo1.sql");
+            FileInputStream archivo = new FileInputStream("C:\\Respaldos/PFEquipo1Respaldo.sql");
             
             byte[] buffer  = new byte[1000];
             
@@ -228,6 +231,7 @@ public class JPOpciones extends javax.swing.JPanel {
                 salida.write(buffer, 0, byteLeido);
                 byteLeido = archivo.read(buffer);
             }
+            
             salida.flush(); //Vaciar el buffer de salida
             salida.close();
             archivo.close();

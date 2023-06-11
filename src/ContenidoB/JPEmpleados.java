@@ -1,22 +1,19 @@
 package ContenidoB;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /*
  * @author crist
  */
 public class JPEmpleados extends javax.swing.JPanel {
-    ConexionDB connect = new ConexionDB();
+    ConexionDB baseDatos = new ConexionDB("PFEquipo1", "Kano", "Royalzkano01");
+    JPOpciones bitacoraA = new JPOpciones();
     Connection con;
     Statement st;
     ResultSet rs;
     DefaultTableModel modeloEmpleado;
-    String iniciarT = "BEGIN";
    
     public JPEmpleados() {
         initComponents();
@@ -42,22 +39,24 @@ public class JPEmpleados extends javax.swing.JPanel {
     public void consultaInicial(){
         try{
             String consultaE = "SELECT * FROM Empleado";
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(consultaE);
-            
-            Object[] empleados = new Object[6];
-            modeloEmpleado = (DefaultTableModel) jTEmpleados.getModel();
-            while(rs.next()){
-                empleados[0] = rs.getInt("idEmpleado");
-                empleados[1] = rs.getString("apellidoP");
-                empleados[2] = rs.getString("apellidoM");
-                empleados[3] = rs.getString("nombreE");
-                empleados[4] = rs.getString("direccion");
-                empleados[5] = rs.getString("tipoEmpleado");
-                
-                modeloEmpleado.addRow(empleados);
-            }jTEmpleados.setModel(modeloEmpleado);
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement(); // Usar baseDatos.con en lugar de con
+                rs = st.executeQuery(consultaE);
+
+                Object[] empleados = new Object[6];
+                modeloEmpleado = (DefaultTableModel) jTEmpleados.getModel();
+                while (rs.next()) {
+                    empleados[0] = rs.getInt("idEmpleado");
+                    empleados[1] = rs.getString("apellidoP");
+                    empleados[2] = rs.getString("apellidoM");
+                    empleados[3] = rs.getString("nombreE");
+                    empleados[4] = rs.getString("direccion");
+                    empleados[5] = rs.getString("tipoEmpleado");
+
+                    modeloEmpleado.addRow(empleados);
+                }
+                jTEmpleados.setModel(modeloEmpleado);
+            }
         }catch(Exception e){
             System.out.println("El error es: "+e);
         }
@@ -314,44 +313,15 @@ public class JPEmpleados extends javax.swing.JPanel {
         String direccion = jTFDireccion.getText();
         String tipoE = this.jCBTipoE.getSelectedItem().toString();
         
-        
-        String queryInsertar = "INSERT INTO empleado (apellidoP, apellidoM, nombreE, direccion, tipoEmpleado) VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombreE + "','" + direccion + "', '" + tipoE + "')";
-
         if (apellidoP.equals("") && apellidoM.equals("") && nombreE.equals("") && direccion.equals("") && tipoE.equals("Seleccionar")) {
             JOptionPane.showMessageDialog(null, "Tienes que ingresar datos");
         } else if (apellidoP.equals("") || apellidoM.equals("") || nombreE.equals("") || direccion.equals("") || tipoE.equals("Seleccionar")) {
             JOptionPane.showMessageDialog(null, "Ingresa los datos faltantes");
         } else {
-            try {
-                con = connect.getConnection();
-                st = con.createStatement();
-                st.execute(iniciarT);
-                st.executeUpdate(queryInsertar);
-                JOptionPane.showMessageDialog(null, "Registro agregado");
-                con.commit();
-                
+            if (baseDatos.conectar()) {
+                baseDatos.insertQuery(apellidoP, apellidoM, nombreE, direccion, tipoE, "", "", 1);
                 limpiarTabla();
                 consultaInicial();
-            } catch (SQLException e) {
-                System.out.println("Error: " + e);
-                if(con != null){
-                    try {
-                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                        con.rollback();
-                    } catch (SQLException ex) {
-                        System.out.println("Error: "+ex);
-                    }
-                }
-            } finally {
-                try {
-                    if (st != null && con != null) {
-                        con.setAutoCommit(true);
-                        st.close();
-                        con.close();
-                    }   
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar "+e);
-                }
             }
             this.limpiarCampos();
         }
@@ -366,38 +336,10 @@ public class JPEmpleados extends javax.swing.JPanel {
         String direccion = jTFDireccion.getText();
         String tipoE = this.jCBTipoE.getSelectedItem().toString();
         
-        String modifSql = "UPDATE Empleado SET apellidoP='"+apellidoP+"',apellidoM='"+apellidoM+"', nombreE ='"+nombreE+"', direccion='"+direccion+"', tipoEmpleado='"+tipoE+"' WHERE idEmpleado = "+idEmpleado;
-        
-        try {
-            con = connect.getConnection();
-            st = con.createStatement();
-            st.execute(iniciarT);
-            st.execute(modifSql);
-            JOptionPane.showMessageDialog(null, "Registro Actualizado");
-            con.commit();
-
+        if(baseDatos.conectar()){
+            baseDatos.updateQuery(idEmpleado, apellidoP, apellidoM, nombreE, direccion, tipoE, "", "", 1);
             limpiarTabla();
             consultaInicial();
-        } catch (Exception e) {
-            System.out.println("El error es: " + e);
-            if (con != null) {
-                try {
-                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                    con.rollback();
-                } catch (SQLException ex) {
-                    System.out.println("Error: " + ex);
-                }
-            }
-        } finally {
-            try {
-                if (st != null && con != null) {
-                    con.setAutoCommit(true);
-                    st.close();
-                    con.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar " + e);
-            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
@@ -407,68 +349,43 @@ public class JPEmpleados extends javax.swing.JPanel {
         String buscarSql = "SELECT * FROM Empleado WHERE nombreE LIKE '%" + nombreB + "%'";
         try {
             limpiarTabla();
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(buscarSql);
-            
-            Object[] empleados = new Object[6];
-            modeloEmpleado = (DefaultTableModel) jTEmpleados.getModel();
-            while (rs.next()) {
-                empleados[0] = rs.getInt("idEmpleado");
-                empleados[1] = rs.getString("apellidoP");
-                empleados[2] = rs.getString("apellidoM");
-                empleados[3] = rs.getString("nombreE");
-                empleados[4] = rs.getString("direccion");
-                empleados[5] = rs.getString("tipoEmpleado");
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement();
+                rs = st.executeQuery(buscarSql);
 
-                modeloEmpleado.addRow(empleados);
+                Object[] empleados = new Object[6];
+                modeloEmpleado = (DefaultTableModel) jTEmpleados.getModel();
+                while (rs.next()) {
+                    empleados[0] = rs.getInt("idEmpleado");
+                    empleados[1] = rs.getString("apellidoP");
+                    empleados[2] = rs.getString("apellidoM");
+                    empleados[3] = rs.getString("nombreE");
+                    empleados[4] = rs.getString("direccion");
+                    empleados[5] = rs.getString("tipoEmpleado");
+
+                    modeloEmpleado.addRow(empleados);
+                }
+                if (modeloEmpleado.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
+                    consultaInicial();
+                }
+                jTEmpleados.setModel(modeloEmpleado);
             }
-            if (modeloEmpleado.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
-                consultaInicial();
-            }
-            jTEmpleados.setModel(modeloEmpleado);
+
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
         this.limpiarCampos();
-        //this.jBReiniciar.setEnabled(true);
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTEmpleados.getSelectedRow();
         int idEmpleado = Integer.parseInt(this.jTEmpleados.getValueAt(fila, 0).toString());
-        String sql = "DELETE FROM Empleado WHERE idEmpleado = " + idEmpleado;
-        try {
-            con = connect.getConnection();
-            st = con.createStatement();
-            st.execute(iniciarT);
-            st.execute(sql);
-            JOptionPane.showMessageDialog(null, "Registro Eliminado");
-            con.commit();
-            
+        
+        if(baseDatos.conectar()){
+            baseDatos.deleteQuery(idEmpleado, 1);
             limpiarTabla();
             consultaInicial();
-        } catch (Exception e) {
-            System.out.println("El error fue: " + e);
-            if (con != null) {
-                try {
-                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                    con.rollback();
-                } catch (SQLException ex) {
-                    System.out.println("Error: " + ex);
-                }
-            }
-        } finally {
-            try {
-                if (st != null && con != null) {
-                    con.setAutoCommit(true);
-                    st.close();
-                    con.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar " + e);
-            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBEliminarActionPerformed

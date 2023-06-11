@@ -1,7 +1,6 @@
 package ContenidoB;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -9,12 +8,11 @@ import javax.swing.table.DefaultTableModel;
  * @author crist
  */
 public class JPClientes extends javax.swing.JPanel {
-    ConexionDB connect = new ConexionDB();
+    ConexionDB baseDatos = new ConexionDB("PFEquipo1", "Kano", "Royalzkano01");
     Connection con;
     Statement st;
     ResultSet rs;
     DefaultTableModel modeloCliente;
-    String iniciarT = "BEGIN";
 
     public JPClientes() {
         initComponents();
@@ -39,21 +37,23 @@ public class JPClientes extends javax.swing.JPanel {
     public void consultaInicial(){
         try{
             String consultaE = "SELECT * FROM cliente";
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(consultaE);
-            
-            Object[] clientes = new Object[5];
-            modeloCliente = (DefaultTableModel) jTClientes.getModel();
-            while(rs.next()){
-                clientes[0] = rs.getInt("idCliente");
-                clientes[1] = rs.getString("apellidoP");
-                clientes[2] = rs.getString("apellidoM");
-                clientes[3] = rs.getString("nombreC");
-                clientes[4] = rs.getString("direccion");
-                
-                modeloCliente.addRow(clientes);
-            }jTClientes.setModel(modeloCliente);
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement();
+                rs = st.executeQuery(consultaE);
+
+                Object[] clientes = new Object[5];
+                modeloCliente = (DefaultTableModel) jTClientes.getModel();
+                while (rs.next()) {
+                    clientes[0] = rs.getInt("idCliente");
+                    clientes[1] = rs.getString("apellidoP");
+                    clientes[2] = rs.getString("apellidoM");
+                    clientes[3] = rs.getString("nombreC");
+                    clientes[4] = rs.getString("direccion");
+
+                    modeloCliente.addRow(clientes);
+                }
+                jTClientes.setModel(modeloCliente);
+            }
         }catch(Exception e){
             System.out.println("El error es: "+e);
         }
@@ -312,37 +312,10 @@ public class JPClientes extends javax.swing.JPanel {
         } else if (apellidoP.equals("") || apellidoM.equals("") || nombreC.equals("") || direccion.equals("") || nombreC.equals("Seleccionar")) {
             JOptionPane.showMessageDialog(null, "Ingresa los datos faltantes");
         } else {
-            try {
-                con = connect.getConnection();
-                st = con.createStatement();
-                st.execute(iniciarT);
-                st.executeUpdate(queryInsertar);
-                JOptionPane.showMessageDialog(null, "Registro agregado");
-                con.commit();
-                
+            if (baseDatos.conectar()) {
+                baseDatos.insertQuery(apellidoP, apellidoM, nombreC, direccion, "", "", "", 2);
                 limpiarTabla();
                 consultaInicial();
-            } catch (SQLException e) {
-                System.out.println("Error: " + e);
-                System.out.println("Error: " + e);
-                if(con != null){
-                    try {
-                        JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                        con.rollback();
-                    } catch (SQLException ex) {
-                        System.out.println("Error: "+ex);
-                    }
-                }
-            } finally {
-                try {
-                    if (st != null && con != null) {
-                        con.setAutoCommit(true);
-                        st.close();
-                        con.close();
-                    }   
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar "+e);
-                }
             }
             this.limpiarCampos();
         }
@@ -356,38 +329,10 @@ public class JPClientes extends javax.swing.JPanel {
         String nombreC = jTFNombreC.getText();
         String direccion = jTFDireccion.getText();
         
-        String modifSql = "UPDATE cliente SET apellidoP='"+apellidoP+"',apellidoM='"+apellidoM+"', nombreC ='"+nombreC+"', direccion='"+direccion+"' WHERE idCliente = "+idCliente;
-        
-        try{
-            con = connect.getConnection();
-            st = con.createStatement();
-            st.execute(iniciarT);
-            st.execute(modifSql);
-            JOptionPane.showMessageDialog(null, "Registro Actualizado");
-            con.commit();
-            
+        if(baseDatos.conectar()){
+            baseDatos.updateQuery(idCliente, apellidoP, apellidoM, nombreC, direccion, "", "", "", 2);
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error es: "+e);
-            if (con != null) {
-                try {
-                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                    con.rollback();
-                } catch (SQLException ex) {
-                    System.out.println("Error: " + ex);
-                }
-            }
-        } finally {
-            try {
-                if (st != null && con != null) {
-                    con.setAutoCommit(true);
-                    st.close();
-                    con.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar " + e);
-            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
@@ -404,37 +349,11 @@ public class JPClientes extends javax.swing.JPanel {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         int fila = this.jTClientes.getSelectedRow();
         int idCliente = Integer.parseInt(this.jTClientes.getValueAt(fila, 0).toString());
-        String sql = "DELETE FROM cliente WHERE idCliente = "+idCliente;
-        try{
-            con = connect.getConnection();
-            st = con.createStatement();
-            st.execute(iniciarT);
-            st.execute(sql);
-            JOptionPane.showMessageDialog(null, "Registro Eliminado");
-            con.commit();
-            
+        
+        if(baseDatos.conectar()){
+            baseDatos.deleteQuery(idCliente, 2);
             limpiarTabla();
             consultaInicial();
-        }catch(Exception e){
-            System.out.println("El error fue: "+e);
-            if (con != null) {
-                try {
-                    JOptionPane.showMessageDialog(null, "Deshaciendo Cambios");
-                    con.rollback();
-                } catch (SQLException ex) {
-                    System.out.println("Error: " + ex);
-                }
-            }
-        } finally {
-            try {
-                if (st != null && con != null) {
-                    con.setAutoCommit(true);
-                    st.close();
-                    con.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar " + e);
-            }
         }
         this.limpiarCampos();
     }//GEN-LAST:event_jBEliminarActionPerformed
@@ -448,27 +367,29 @@ public class JPClientes extends javax.swing.JPanel {
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         String nombreB = jTFNombreC.getText();
         String buscarSql = "SELECT * FROM cliente WHERE nombrec LIKE '%" + nombreB + "%'";
-        try{
+        try {
             limpiarTabla();
-            con = connect.getConnection();
-            st = con.createStatement();
-            rs = st.executeQuery(buscarSql);
-            
-            Object[] clientes = new Object[5];
-            modeloCliente = (DefaultTableModel) jTClientes.getModel();
-            while(rs.next()){
-                clientes[0] = rs.getInt("idCliente");
-                clientes[1] = rs.getString("apellidoP");
-                clientes[2] = rs.getString("apellidoM");
-                clientes[3] = rs.getString("nombreC");
-                clientes[4] = rs.getString("direccion");
-                
-                modeloCliente.addRow(clientes);
-            }if(modeloCliente.getRowCount() == 0){
-                JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
-                consultaInicial();
-            }
-            jTClientes.setModel(modeloCliente);
+            if (baseDatos.conectar()) {
+                st = baseDatos.con.createStatement();
+                rs = st.executeQuery(buscarSql);
+
+                Object[] clientes = new Object[5];
+                modeloCliente = (DefaultTableModel) jTClientes.getModel();
+                while (rs.next()) {
+                    clientes[0] = rs.getInt("idCliente");
+                    clientes[1] = rs.getString("apellidoP");
+                    clientes[2] = rs.getString("apellidoM");
+                    clientes[3] = rs.getString("nombreC");
+                    clientes[4] = rs.getString("direccion");
+
+                    modeloCliente.addRow(clientes);
+                }
+                if (modeloCliente.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "No existe el registro relacionado con " + nombreB);
+                    consultaInicial();
+                }
+                jTClientes.setModel(modeloCliente);
+            }          
         }catch(Exception e){
             System.out.println("El error es: "+e);
         }

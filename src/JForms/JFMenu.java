@@ -214,7 +214,7 @@ public class JFMenu extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jBCerrarS)
-                .addGap(77, 77, 77)
+                .addGap(47, 47, 47)
                 .addComponent(jBInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,7 +225,8 @@ public class JFMenu extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jBProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPHeader.setBackground(new java.awt.Color(255, 255, 255));
@@ -364,7 +365,7 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBInicioActionPerformed
 
     private void jBCerrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSActionPerformed
-        JFLogin cLogin = new JFLogin();
+        JFIngresarU cLogin = new JFIngresarU();
         JOptionPane.showMessageDialog(null, "Sesion Cerrada");
         cLogin.setVisible(true);
         dispose();

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
 -- Host: localhost    Database: PFEquipo1
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ CREATE TABLE `bacceso` (
   `valorViejo` varchar(255) DEFAULT NULL,
   `valorNuevo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `bacceso` (
 
 LOCK TABLES `bacceso` WRITE;
 /*!40000 ALTER TABLE `bacceso` DISABLE KEYS */;
-INSERT INTO `bacceso` VALUES (1,'Kano@localhost','2023-05-22 05:02:07','INSERT','empleado',NULL,'12 Becerra Hernandez Paulino Niño Perdido #45 Cajero'),(2,'Kano@localhost','2023-05-22 05:02:27','UPDATE','empleado','6 Castañares Roman Jennifer Citlalli Veracu Cajero','6 Castañares Roman Jennifer Citlalli Veracruz Cajero'),(3,'Kano@localhost','2023-05-22 05:02:30','DELETE','empleado','12 Becerra Hernandez Paulino Niño Perdido #45 Cajero',NULL),(4,'Kano@localhost','2023-05-22 05:02:51','INSERT','cliente',NULL,'10 Munguia Anell Victor Sauces'),(5,'Kano@localhost','2023-05-22 05:02:58','UPDATE','cliente','10 Munguia Anell Victor Sauces','10 Munguia Anell Victor Manuel Sauces'),(6,'Kano@localhost','2023-05-22 05:03:01','DELETE','cliente','5 Guiochin Solares Jesus Jarras #42',NULL),(7,'Kano@localhost','2023-05-22 05:03:22','INSERT','proveedor',NULL,'7 Ceballos Martinez Ada Acajete'),(8,'Kano@localhost','2023-05-22 05:03:25','DELETE','proveedor','5 Juarez Luna Genaro Enrriqueta Lucas #456',NULL),(9,'Kano@localhost','2023-05-22 05:03:32','UPDATE','proveedor','7 Ceballos Martinez Ada Acajete','7 Ceballos Martinez Ada Fanny Acajete'),(10,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'7 Plato Hondo 600 ml 22.00'),(11,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'8 Vaso Termico 8 oz, 237 ml 17.00'),(12,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'9 Cuchara Pastelera 50 piezas 12.00'),(13,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'10 Vaso de Gelatina 5.8 oz 28.00'),(14,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'11 Plato Pastelero 25 piezas 19.00'),(15,'Kano@localhost','2023-05-22 05:05:04','INSERT','producto',NULL,'12 Cucharas Pasteleras 40 Piezas 25.00'),(16,'Kano@localhost','2023-05-22 05:05:19','UPDATE','producto','10 Vaso de Gelatina 5.8 oz 28.00','10 Vaso de Gelatina 5.8 oz 22.00'),(17,'Kano@localhost','2023-05-22 05:09:18','DELETE','producto','7 Plato Hondo 600 ml 22.00',NULL),(18,'Gerente','2023-05-23 01:46:21',NULL,NULL,NULL,NULL),(19,'Kano@localhost','2023-05-27 23:18:44','UPDATE','empleado','6 Castañares Roman Jennifer Citlalli Veracruz Cajero','6 Castañares Roman Jennifer Citlalli Vera Cajero'),(20,'Kano@localhost','2023-05-28 00:35:12','INSERT','empleado',NULL,'13 Alarcon Lasso Alondra Fodonga #45 Cajero'),(21,'Kano@localhost','2023-05-28 00:43:32','INSERT','empleado',NULL,'14 Alarcon Lasso Alondra Fodonga #455 Cajero'),(22,'Kano@localhost','2023-05-28 00:43:42','DELETE','empleado','14 Alarcon Lasso Alondra Fodonga #455 Cajero',NULL),(23,'Kano@localhost','2023-05-28 00:43:47','UPDATE','empleado','13 Alarcon Lasso Alondra Fodonga #45 Cajero','13 Alarcon Lasso Alondra Fodonga #455 Cajero'),(24,'Kano@localhost','2023-05-28 01:08:59','INSERT','producto',NULL,'13 Chetos Morados 15.00'),(25,'Kano@localhost','2023-05-28 01:09:07','UPDATE','producto','13 Chetos Morados 15.00','13 Chetos Morados 17.00'),(26,'Kano@localhost','2023-05-28 01:09:12','DELETE','producto','13 Chetos Morados 17.00',NULL);
+INSERT INTO `bacceso` VALUES (1,'Kano@localhost','2023-05-22 05:02:07','INSERT','empleado',NULL,'12 Becerra Hernandez Paulino Niño Perdido #45 Cajero'),(2,'Kano@localhost','2023-05-22 05:02:27','UPDATE','empleado','6 Castañares Roman Jennifer Citlalli Veracu Cajero','6 Castañares Roman Jennifer Citlalli Veracruz Cajero'),(3,'Kano@localhost','2023-05-22 05:02:30','DELETE','empleado','12 Becerra Hernandez Paulino Niño Perdido #45 Cajero',NULL),(4,'Kano@localhost','2023-05-22 05:02:51','INSERT','cliente',NULL,'10 Munguia Anell Victor Sauces'),(5,'Kano@localhost','2023-05-22 05:02:58','UPDATE','cliente','10 Munguia Anell Victor Sauces','10 Munguia Anell Victor Manuel Sauces'),(6,'Kano@localhost','2023-05-22 05:03:01','DELETE','cliente','5 Guiochin Solares Jesus Jarras #42',NULL),(7,'Kano@localhost','2023-05-22 05:03:22','INSERT','proveedor',NULL,'7 Ceballos Martinez Ada Acajete'),(8,'Kano@localhost','2023-05-22 05:03:25','DELETE','proveedor','5 Juarez Luna Genaro Enrriqueta Lucas #456',NULL),(9,'Kano@localhost','2023-05-22 05:03:32','UPDATE','proveedor','7 Ceballos Martinez Ada Acajete','7 Ceballos Martinez Ada Fanny Acajete'),(10,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'7 Plato Hondo 600 ml 22.00'),(11,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'8 Vaso Termico 8 oz, 237 ml 17.00'),(12,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'9 Cuchara Pastelera 50 piezas 12.00'),(13,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'10 Vaso de Gelatina 5.8 oz 28.00'),(14,'Kano@localhost','2023-05-22 05:04:04','INSERT','producto',NULL,'11 Plato Pastelero 25 piezas 19.00'),(15,'Kano@localhost','2023-05-22 05:05:04','INSERT','producto',NULL,'12 Cucharas Pasteleras 40 Piezas 25.00'),(16,'Kano@localhost','2023-05-22 05:05:19','UPDATE','producto','10 Vaso de Gelatina 5.8 oz 28.00','10 Vaso de Gelatina 5.8 oz 22.00'),(17,'Kano@localhost','2023-05-22 05:09:18','DELETE','producto','7 Plato Hondo 600 ml 22.00',NULL),(18,'Gerente','2023-05-23 01:46:21',NULL,NULL,NULL,NULL),(19,'Kano@localhost','2023-05-27 23:18:44','UPDATE','empleado','6 Castañares Roman Jennifer Citlalli Veracruz Cajero','6 Castañares Roman Jennifer Citlalli Vera Cajero'),(20,'Kano@localhost','2023-05-28 00:35:12','INSERT','empleado',NULL,'13 Alarcon Lasso Alondra Fodonga #45 Cajero'),(21,'Kano@localhost','2023-05-28 00:43:32','INSERT','empleado',NULL,'14 Alarcon Lasso Alondra Fodonga #455 Cajero'),(22,'Kano@localhost','2023-05-28 00:43:42','DELETE','empleado','14 Alarcon Lasso Alondra Fodonga #455 Cajero',NULL),(23,'Kano@localhost','2023-05-28 00:43:47','UPDATE','empleado','13 Alarcon Lasso Alondra Fodonga #45 Cajero','13 Alarcon Lasso Alondra Fodonga #455 Cajero'),(24,'Kano@localhost','2023-05-28 01:08:59','INSERT','producto',NULL,'13 Chetos Morados 15.00'),(25,'Kano@localhost','2023-05-28 01:09:07','UPDATE','producto','13 Chetos Morados 15.00','13 Chetos Morados 17.00'),(26,'Kano@localhost','2023-05-28 01:09:12','DELETE','producto','13 Chetos Morados 17.00',NULL),(27,'Kano@localhost','2023-06-02 23:35:30','DELETE','empleado','13 Alarcon Lasso Alondra Fodonga #455 Cajero',NULL),(28,'Kano@localhost','2023-06-02 23:36:24','INSERT','empleado',NULL,'15 Rodriguez Marquez Julian Ignacio Allende #45 Ayudante'),(29,'Kano@localhost','2023-06-02 23:36:58','DELETE','empleado','15 Rodriguez Marquez Julian Ignacio Allende #45 Ayudante',NULL),(30,'Kano@localhost','2023-06-02 23:37:26','INSERT','empleado',NULL,'16 Marquez Rodriguez Julian Ignacio Allende #5 Ayudante'),(31,'Kano@localhost','2023-06-11 06:50:00','INSERT','empleado',NULL,'17 Lasso Alarcon Alondra Fodonga #456 Cajero'),(32,'Kano@localhost','2023-06-11 06:50:19','DELETE','empleado','17 Lasso Alarcon Alondra Fodonga #456 Cajero',NULL),(33,'Kano@localhost','2023-06-11 06:55:24','UPDATE','empleado','16 Marquez Rodriguez Julian Ignacio Allende #5 Ayudante','16 Marquez Rodriguezz Julian Ignacio Allende #5 Ayudante'),(34,'Kano@localhost','2023-06-11 07:06:44','INSERT','cliente',NULL,'11 Hola Hola Hola Hola #345'),(35,'Kano@localhost','2023-06-11 07:06:50','UPDATE','cliente','11 Hola Hola Hola Hola #345','11 Hola Holaaa Hola Hola #345'),(36,'Kano@localhost','2023-06-11 07:08:47','DELETE','cliente','11 Hola Holaaa Hola Hola #345',NULL),(37,'Kano@localhost','2023-06-11 07:16:33','INSERT','proveedor',NULL,'8 a a aa aa #34'),(38,'Kano@localhost','2023-06-11 07:16:57','UPDATE','proveedor','8 a a aa aa #34','8 a a aa aa #345'),(39,'Kano@localhost','2023-06-11 07:17:02','DELETE','proveedor','8 a a aa aa #345',NULL),(40,'Kano@localhost','2023-06-11 07:25:07','INSERT','producto',NULL,'14 1 1 20.00'),(41,'Kano@localhost','2023-06-11 07:25:14','UPDATE','producto','14 1 1 20.00','14 1 11 20.00'),(42,'Kano@localhost','2023-06-11 07:25:25','DELETE','producto','14 1 11 20.00',NULL),(43,'Kano@localhost','2023-06-11 07:31:00','INSERT','empleado',NULL,'18 Munguia Anell Victor Sauces Ayudante'),(44,'Kano@localhost','2023-06-11 07:34:41','INSERT','empleado',NULL,'19 a a a a Cajero'),(45,'Kano@localhost','2023-06-11 07:35:41','INSERT','empleado',NULL,'20 s s s s Cajero'),(46,'Kano@localhost','2023-06-11 07:35:54','DELETE','empleado','19 a a a a Cajero',NULL),(47,'Kano@localhost','2023-06-11 07:35:57','DELETE','empleado','20 s s s s Cajero',NULL);
 /*!40000 ALTER TABLE `bacceso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `cliente` (
   `nombreC` varchar(25) DEFAULT NULL,
   `direccion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +210,7 @@ CREATE TABLE `empleado` (
   `direccion` varchar(45) DEFAULT NULL,
   `tipoEmpleado` enum('Cajero','Ayudante') DEFAULT NULL,
   PRIMARY KEY (`idEmpleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +219,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'Carball','Cano','Christian Noe','Jose de Alvarado #232','Cajero'),(2,'De La Luz','Sierra','Rafael Alejandro','Lazaro Cardenas','Cajero'),(6,'Castañares','Roman','Jennifer Citlalli','Vera','Cajero'),(13,'Alarcon','Lasso','Alondra','Fodonga #455','Cajero');
+INSERT INTO `empleado` VALUES (1,'Carball','Cano','Christian Noe','Jose de Alvarado #232','Cajero'),(2,'De La Luz','Sierra','Rafael Alejandro','Lazaro Cardenas','Cajero'),(6,'Castañares','Roman','Jennifer Citlalli','Vera','Cajero'),(16,'Marquez','Rodriguezz','Julian','Ignacio Allende #5','Ayudante'),(18,'Munguia','Anell','Victor','Sauces','Ayudante');
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -330,7 +330,7 @@ CREATE TABLE `producto` (
   `descripcion` varchar(40) DEFAULT NULL,
   `precio` decimal(9,2) DEFAULT NULL,
   PRIMARY KEY (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +423,7 @@ CREATE TABLE `proveedor` (
   `nombreP` varchar(25) DEFAULT NULL,
   `direccion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idProveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -578,46 +578,33 @@ LOCK TABLES `telefonosp` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `usuario`
+-- Table structure for table `usuariot`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `usuariot`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuario` (
+CREATE TABLE `usuariot` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `apellidoP` varchar(50) DEFAULT NULL,
+  `apellidoM` varchar(50) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `roll` enum('Gerente','Empleado') DEFAULT NULL,
   `usuario` varchar(50) DEFAULT NULL,
-  `contraseña` varchar(50) DEFAULT NULL,
+  `contraseña` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario`
+-- Dumping data for table `usuariot`
 --
 
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Admin','12345'),(2,'Gerente','12345');
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+LOCK TABLES `usuariot` WRITE;
+/*!40000 ALTER TABLE `usuariot` DISABLE KEYS */;
+INSERT INTO `usuariot` VALUES (1,'Carballo','Cano','Christian Noe','Gerente','Kano','44511934f287d92bed8a9bf3e88c53b9'),(2,'Roman','Castañares','Jennifer','Gerente','Jennilu12','62fea7fb53aa5e345f7bc43963c90489'),(3,'De La Luz','Sierra','Rafael','Gerente','Ale18','52fe36933fcff389814008e695ca021e'),(4,'Munguia','Anell','Victor','Empleado','MunguiaA12','2a827c5b1a556600066b1e5885263d65');
+/*!40000 ALTER TABLE `usuariot` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = cp850 */ ;
-/*!50003 SET character_set_results = cp850 */ ;
-/*!50003 SET collation_connection  = cp850_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`Kano`@`localhost`*/ /*!50003 TRIGGER `tAcceso` AFTER INSERT ON `usuario` FOR EACH ROW BEGIN
-  INSERT INTO bAcceso (usuario, fecha) VALUES (NEW.usuario, CURRENT_TIMESTAMP);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `venta`
@@ -659,4 +646,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-27 19:46:18
+-- Dump completed on 2023-06-11  1:46:42
