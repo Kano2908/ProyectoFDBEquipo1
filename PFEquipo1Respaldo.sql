@@ -70,72 +70,6 @@ LOCK TABLES `cliente` WRITE;
 INSERT INTO `cliente` VALUES (1,'Suarez','Rodriguez','Juan','Murillo Vidal #2'),(2,'Acosta','Marquez','Liliana','Constitucion #119'),(3,'Diaz','Hernandez','Paulino','Niño Perdido #56'),(4,'Jimenez','Carillo','Raquel','Benito juarez #334'),(10,'Munguia','Anell','Victor Manuel','Sauces');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`Kano`@`localhost`*/ /*!50003 TRIGGER `triggerCI` AFTER INSERT ON `cliente` FOR EACH ROW BEGIN
-    DECLARE operacion VARCHAR(55);
-    
-    SET operacion = 'INSERT';
-    
-    INSERT INTO bAcceso (usuario, fecha, operacion, tabla, valorViejo, valorNuevo)
-    VALUES (USER(), NOW(), operacion, 'cliente', NULL, CONCAT(NEW.idCliente, ' ', NEW.apellidoP, ' ', NEW.apellidoM, ' ', NEW.nombreC, ' ', NEW.direccion));
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`Kano`@`localhost`*/ /*!50003 TRIGGER `triggerCU` AFTER UPDATE ON `cliente` FOR EACH ROW BEGIN
-    DECLARE operacion VARCHAR(55);
-    
-    SET operacion = 'UPDATE';
-    
-    INSERT INTO bAcceso (usuario, fecha, operacion, tabla, valorViejo, valorNuevo)
-    VALUES (USER(), NOW(), operacion, 'cliente', CONCAT(OLD.idCliente, ' ',OLD.apellidoP, ' ', OLD.apellidoM, ' ', OLD.nombreC, ' ', OLD.direccion), CONCAT(NEW.idCliente, ' ',NEW.apellidoP, ' ', NEW.apellidoM, ' ', NEW.nombreC, ' ', NEW.direccion));
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`Kano`@`localhost`*/ /*!50003 TRIGGER `triggerCD` AFTER DELETE ON `cliente` FOR EACH ROW BEGIN
-    DECLARE operacion VARCHAR(55);
-    
-    SET operacion = 'DELETE';
-    
-    INSERT INTO bAcceso (usuario, fecha, operacion, tabla, valorViejo, valorNuevo)
-    VALUES (USER(), NOW(), operacion, 'cliente', CONCAT(OLD.idCliente, ' ',OLD.apellidoP, ' ', OLD.apellidoM, ' ', OLD.nombreC, ' ', OLD.direccion), NULL);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `detallapedido`
@@ -593,7 +527,7 @@ CREATE TABLE `usuariot` (
   `usuario` varchar(50) DEFAULT NULL,
   `contraseña` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,7 +536,7 @@ CREATE TABLE `usuariot` (
 
 LOCK TABLES `usuariot` WRITE;
 /*!40000 ALTER TABLE `usuariot` DISABLE KEYS */;
-INSERT INTO `usuariot` VALUES (1,'Carballo','Cano','Christian Noe','Gerente','Kano','44511934f287d92bed8a9bf3e88c53b9'),(2,'Roman','Castañares','Jennifer','Gerente','Jennilu12','62fea7fb53aa5e345f7bc43963c90489'),(3,'De La Luz','Sierra','Rafael','Gerente','Ale18','52fe36933fcff389814008e695ca021e'),(4,'Munguia','Anell','Victor','Empleado','MunguiaA12','2a827c5b1a556600066b1e5885263d65');
+INSERT INTO `usuariot` VALUES (1,'Carballo','Cano','Christian','Gerente','Kano','44511934f287d92bed8a9bf3e88c53b9'),(2,'De La Luz','Sierra','Alejandro','Empleado','Ale18','52fe36933fcff389814008e695ca021e');
 /*!40000 ALTER TABLE `usuariot` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -646,4 +580,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-11  1:46:42
+-- Dump completed on 2023-06-11 16:31:56
