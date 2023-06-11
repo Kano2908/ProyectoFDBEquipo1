@@ -222,30 +222,30 @@ public class JPOpciones extends javax.swing.JPanel {
 
     private void jBRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRestaurarActionPerformed
         try {
-        String usuario = "Kano";
-        String contraseña = "Royalzkano01";
-        String nombreBD = "PFEquipo1";
-        String rutaRespaldo = "C:/Respaldos/PFEquipo1Respaldo.sql";
+            String usuario = "Kano";
+            String contraseña = "Royalzkano01";
+            String nombreBD = "PFEquipo1";
+            String rutaRespaldo = "C:/Respaldos/PFEquipo1Respaldo.sql";
 
-        Process proceso = Runtime.getRuntime().exec("mysql -u " + usuario + " -p" + contraseña + " " + nombreBD);
-        OutputStream salida = proceso.getOutputStream();
+            Process proceso = Runtime.getRuntime().exec("mysql -u " + usuario + " -p" + contraseña + " " + nombreBD);
+            OutputStream salida = proceso.getOutputStream();
 
-        FileInputStream archivo = new FileInputStream(rutaRespaldo);
+            FileInputStream archivo = new FileInputStream(rutaRespaldo);
 
-        byte[] buffer = new byte[1000];
+            byte[] buffer = new byte[1000];
 
-        int byteLeido = archivo.read(buffer);
+            int byteLeido = archivo.read(buffer);
 
-        while (byteLeido > 0) {
-            salida.write(buffer, 0, byteLeido);
-            byteLeido = archivo.read(buffer);
+            while (byteLeido > 0) {
+                salida.write(buffer, 0, byteLeido);
+                byteLeido = archivo.read(buffer);
+            }
+
+            JOptionPane.showMessageDialog(null, "Rstauracion Finalizada");
+            salida.flush(); // Vaciar el buffer de salida
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al restaurar el respaldo: " + ex.getMessage());
         }
-        
-        JOptionPane.showMessageDialog(null, "Rstauracion Finalizada");
-        salida.flush(); // Vaciar el buffer de salida
-    } catch (IOException ex) {
-        JOptionPane.showMessageDialog(null, "Error al restaurar el respaldo: " + ex.getMessage());
-    }
     }//GEN-LAST:event_jBRestaurarActionPerformed
 
 
