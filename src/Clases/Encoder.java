@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 
 public class Encoder {
     public String ecnode(String password){
-        String encriptacion = "";
         try{
             // Crear una instancia del algoritmo de hash MD5
             MessageDigest md = MessageDigest.getInstance("MD5");

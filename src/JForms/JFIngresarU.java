@@ -375,8 +375,6 @@ public class JFIngresarU extends javax.swing.JFrame {
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
         UsuarioT xUsuario = new UsuarioT();
         String password = "";
-        String gerente = "SELECT * FROM usuarioT WHERE roll = 'Gerente'";
-        String empleado = "SELECT * FROM usuarioT WHERE roll = 'Empleado'";
         if(!jTFUsuario.getText().trim().equals("") && !jPFContraseña.getText().trim().equals("")){
             if (baseDatos.conectar()) {
                 xUsuario = baseDatos.getUsuario(jTFUsuario.getText().trim());

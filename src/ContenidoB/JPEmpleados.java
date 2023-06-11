@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JPEmpleados extends javax.swing.JPanel {
     ConexionDB baseDatos = new ConexionDB("PFEquipo1", "Kano", "Royalzkano01");
-    JPOpciones bitacoraA = new JPOpciones();
     Connection con;
     Statement st;
     ResultSet rs;
@@ -40,7 +39,7 @@ public class JPEmpleados extends javax.swing.JPanel {
         try{
             String consultaE = "SELECT * FROM Empleado";
             if (baseDatos.conectar()) {
-                st = baseDatos.con.createStatement(); // Usar baseDatos.con en lugar de con
+                st = baseDatos.con.createStatement();
                 rs = st.executeQuery(consultaE);
 
                 Object[] empleados = new Object[6];

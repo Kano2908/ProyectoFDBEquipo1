@@ -301,8 +301,6 @@ public class JPProveedores extends javax.swing.JPanel {
         String nombreP = jTFNombreP.getText();
         String direccion = jTFDireccion.getText();
 
-        String queryInsertar = "INSERT INTO proveedor (apellidoP, apellidoM, nombreP, direccion) VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombreP + "','" + direccion + "')";
-
         if (apellidoP.equals("") && apellidoM.equals("") && nombreP.equals("") && direccion.equals("")) {
             JOptionPane.showMessageDialog(null, "Tienes que ingresar datos");
         } else if (apellidoP.equals("") || apellidoM.equals("") || nombreP.equals("") || direccion.equals("")) {

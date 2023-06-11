@@ -195,49 +195,57 @@ public class JPOpciones extends javax.swing.JPanel {
 
     private void jBRespaldarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRespaldarActionPerformed
         try {
-            Process proceso = Runtime.getRuntime().exec("mysqldump -u Kano -pRoyalzkano01 PFEquipo1");
+            String usuario = "Kano";
+            String contraseña = "Royalzkano01";
+            String nombreBD = "PFEquipo1";
+            String rutaRespaldo = "C:/Respaldos/PFEquipo1Respaldo.sql";
+
+            Process proceso = Runtime.getRuntime().exec("mysqldump -u " + usuario + " -p" + contraseña + " " + nombreBD);
             InputStream entrada = proceso.getInputStream();
-            
-            FileOutputStream archivo = new FileOutputStream("C:\\Respaldos/PFEquipo1Respaldo.sql");
-            
-            byte[] buffer  = new byte[1000];
-            
-            int byteLeido = entrada.read(buffer); 
-            
-            while(byteLeido > 0){ //Mientras este leyendo algo
+
+            FileOutputStream archivo = new FileOutputStream(rutaRespaldo);
+
+            byte[] buffer = new byte[1000];
+
+            int byteLeido = entrada.read(buffer);
+
+            while (byteLeido > 0) { // Mientras esté leyendo algo
                 archivo.write(buffer, 0, byteLeido);
                 byteLeido = entrada.read(buffer);
             }
-            
+
             JOptionPane.showMessageDialog(null, "Respaldo Creado");
-            archivo.close();
         } catch (IOException ex) {
-            System.out.println("error: "+ex);
-        }
+            JOptionPane.showMessageDialog(null, "Error al crear el respaldo: " + ex.getMessage());
+        } 
     }//GEN-LAST:event_jBRespaldarActionPerformed
 
     private void jBRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRestaurarActionPerformed
         try {
-            Process proceso = Runtime.getRuntime().exec("mysql -u Kano -pRoyalzkano01 PFEquipo1");
-            OutputStream salida = proceso.getOutputStream();
-            
-            FileInputStream archivo = new FileInputStream("C:\\Respaldos/PFEquipo1Respaldo.sql");
-            
-            byte[] buffer  = new byte[1000];
-            
-            int byteLeido = archivo.read(buffer);
-            
-            while(byteLeido > 0){
-                salida.write(buffer, 0, byteLeido);
-                byteLeido = archivo.read(buffer);
-            }
-            
-            salida.flush(); //Vaciar el buffer de salida
-            salida.close();
-            archivo.close();
-        } catch (IOException ex) {
-            System.out.println("error: "+ex);
+        String usuario = "Kano";
+        String contraseña = "Royalzkano01";
+        String nombreBD = "PFEquipo1";
+        String rutaRespaldo = "C:/Respaldos/PFEquipo1Respaldo.sql";
+
+        Process proceso = Runtime.getRuntime().exec("mysql -u " + usuario + " -p" + contraseña + " " + nombreBD);
+        OutputStream salida = proceso.getOutputStream();
+
+        FileInputStream archivo = new FileInputStream(rutaRespaldo);
+
+        byte[] buffer = new byte[1000];
+
+        int byteLeido = archivo.read(buffer);
+
+        while (byteLeido > 0) {
+            salida.write(buffer, 0, byteLeido);
+            byteLeido = archivo.read(buffer);
         }
+        
+        JOptionPane.showMessageDialog(null, "Rstauracion Finalizada");
+        salida.flush(); // Vaciar el buffer de salida
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(null, "Error al restaurar el respaldo: " + ex.getMessage());
+    }
     }//GEN-LAST:event_jBRestaurarActionPerformed
 
 

@@ -305,8 +305,6 @@ public class JPClientes extends javax.swing.JPanel {
         String nombreC = jTFNombreC.getText();
         String direccion = jTFDireccion.getText();
 
-        String queryInsertar = "INSERT INTO cliente (apellidoP, apellidoM, nombreC, direccion) VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombreC + "','" + direccion + "')";
-
         if (apellidoP.equals("") && apellidoM.equals("") && nombreC.equals("") && direccion.equals("")) {
             JOptionPane.showMessageDialog(null, "Tienes que ingresar datos");
         } else if (apellidoP.equals("") || apellidoM.equals("") || nombreC.equals("") || direccion.equals("") || nombreC.equals("Seleccionar")) {

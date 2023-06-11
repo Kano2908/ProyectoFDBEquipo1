@@ -1,5 +1,4 @@
 //Autor Equipo1
-
 package ContenidoB;
 import Clases.UsuarioT;
 import java.sql.Connection;
@@ -12,7 +11,7 @@ import javax.swing.JOptionPane;
 public class ConexionDB {
     String bd = "PFEquipo1";
     String url = "jdbc:mysql://localhost:3306/";
-    String user = "Kano";                           //Variables de tipo String que almacenaran datos para la conexion a la base
+    String user = "Kano";                           
     String psw = "Royalzkano01";
     String driver = "com.mysql.cj.jdbc.Driver";
     
@@ -25,7 +24,7 @@ public class ConexionDB {
         st = null;
         rs = null;
         
-        this.bd = bd;
+        this.bd  = bd;
         this.user = user;
         this.psw = psw;
     }
@@ -33,7 +32,7 @@ public class ConexionDB {
     public boolean conectar(){
         try{
             Class.forName(this.driver).newInstance();
-            this.con = DriverManager.getConnection(url+bd, user, psw); //Le pasamos los datos al driver y se almacena en la variable con
+            this.con = DriverManager.getConnection(url+bd, user, psw);
             con.setAutoCommit(false); //Deacativamos el autocommit = 0;
             System.out.println("Conexion Establecida En: "+bd);
             return con != null;
@@ -96,25 +95,26 @@ public class ConexionDB {
         return xUsuario;
     }
     
-    public void insertQuery(String apellidoP, String apellidoM, String nombre, String direccion, String tipoE, String descripcion, String precio, int opcion) {
+    public void insertQuery(String apellidoP, String apellidoM, String nombre, String direccion, String tipoE,
+    String descripcion, String precio, int opcion) {
         String queryInsert = "";
 
         switch (opcion) {
             case 1 -> {
                 queryInsert = "INSERT INTO empleado (apellidoP, apellidoM, nombreE, direccion, tipoEmpleado) "
-                        + "VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombre + "','" + direccion + "', '" + tipoE + "')";
+                + "VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombre + "','" + direccion + "', '" + tipoE + "')";
             }
             case 2 -> {
                 queryInsert = "INSERT INTO cliente (apellidoP, apellidoM, nombreC, direccion) "
-                        + "VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombre + "','" + direccion + "')";
+                + "VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombre + "','" + direccion + "')";
             }
             case 3 -> {
                 queryInsert = "INSERT INTO proveedor (apellidoP, apellidoM, nombreP, direccion) "
-                        + "VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombre + "','" + direccion + "')";
+                + "VALUES ('" + apellidoP + "', '" + apellidoM + "','" + nombre + "','" + direccion + "')";
             }
             case 4 -> {
                 queryInsert = "INSERT INTO producto (nombreProducto, descripcion, precio) "
-                        + "VALUES ('" + nombre + "', '" + descripcion + "','" + precio + "')";
+                + "VALUES ('" + nombre + "', '" + descripcion + "','" + precio + "')";
             }
         }
 
@@ -138,24 +138,26 @@ public class ConexionDB {
         }
     }
     
-    public void updateQuery(int id, String apellidoP, String apellidoM, String nombre, String direccion, String tipoE, String descripcion, String precio, int opcion){
+    public void updateQuery(int id, String apellidoP, String apellidoM, String nombre, String direccion, String tipoE,
+    String descripcion, String precio, int opcion){
         String queryUpdate = "";
 
         switch (opcion) {
             case 1 -> {
                 queryUpdate = "UPDATE Empleado SET apellidoP='"+apellidoP+"',apellidoM='"+apellidoM+"', nombreE ='"+nombre+"', "
-                        + "direccion='"+direccion+"', tipoEmpleado='"+tipoE+"' WHERE idEmpleado = "+id;
+                + "direccion='"+direccion+"', tipoEmpleado='"+tipoE+"' WHERE idEmpleado = "+id;
             }
             case 2 -> {
                 queryUpdate = "UPDATE cliente SET apellidoP='"+apellidoP+"',apellidoM='"+apellidoM+"', nombreC ='"+nombre+"', "
-                        + "direccion='"+direccion+"' WHERE idCliente = "+id;
+                + "direccion='"+direccion+"' WHERE idCliente = "+id;
             }
             case 3 -> {
                 queryUpdate = "UPDATE proveedor SET apellidoP='" +apellidoP+ "',apellidoM='" +apellidoM+ "', nombreP ='" +nombre+ "', "
-                        + "direccion='" + direccion + "' WHERE idProveedor = " + id;
+                + "direccion='" + direccion + "' WHERE idProveedor = " + id;
             }
             case 4 -> {
-                queryUpdate = "UPDATE producto SET nombreProducto='"+nombre+"',descripcion='"+descripcion+"', precio ='"+precio+"' WHERE idProducto = "+id;
+                queryUpdate = "UPDATE producto SET nombreProducto='"+nombre+"',descripcion='"+descripcion+"',"
+                + " precio ='"+precio+"' WHERE idProducto = "+id;
             }
         }
         
